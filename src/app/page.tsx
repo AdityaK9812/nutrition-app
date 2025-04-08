@@ -189,16 +189,16 @@ export default function Home() {
 
           {/* Search Section with stronger backdrop */}
           <div className="space-y-8">
-            <form onSubmit={handleSearch} className="search-container p-6 rounded-2xl shadow-lg bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg border border-amber-100 dark:border-amber-900/20">
-              <div className="flex flex-wrap gap-4">
-                <div className="flex-1 min-w-[200px] relative">
+            <form onSubmit={handleSearch} className="search-container p-4 sm:p-6 rounded-2xl shadow-lg bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg border border-amber-100 dark:border-amber-900/20">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex-1 min-w-0 relative">
                   <input
                     type="text"
                     value={foodQuery}
                     onChange={handleQueryChange}
                     onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                     placeholder="Search for any food..."
-                    className="input-modern w-full rounded-xl border-amber-200 dark:border-amber-900/30 focus:border-amber-500 dark:focus:border-amber-700 focus:ring-amber-500 dark:focus:ring-amber-700"
+                    className="input-modern w-full rounded-xl text-lg sm:text-base border-amber-200 dark:border-amber-900/30 focus:border-amber-500 dark:focus:border-amber-700 focus:ring-amber-500 dark:focus:ring-amber-700"
                     required
                   />
                   
@@ -207,11 +207,11 @@ export default function Home() {
                       {suggestions.map((suggestion, index) => (
                         <div
                           key={index}
-                          className="search-result-item hover:bg-slate-100 dark:hover:bg-slate-700"
+                          className="search-result-item p-4 sm:p-3"
                           onClick={() => handleSuggestionClick(suggestion)}
                         >
-                          <span className="font-medium text-primary">{suggestion.name}</span>
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                          <span className="font-medium text-primary block sm:inline">{suggestion.name}</span>
+                          <span className="text-sm text-gray-500 dark:text-gray-400 block sm:inline sm:ml-2">
                             (100 {isLiquidFood(suggestion.name) ? 'ml' : 'g'})
                           </span>
                         </div>
@@ -219,46 +219,48 @@ export default function Home() {
                     </div>
                   )}
                 </div>
-                <div className="w-24">
-                  <input
-                    type="number"
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                    className="quantity-input"
-                    min="1"
-                    required
-                  />
+                <div className="flex gap-4 sm:w-auto">
+                  <div className="flex-1 sm:w-24">
+                    <input
+                      type="number"
+                      value={quantity}
+                      onChange={(e) => setQuantity(e.target.value)}
+                      className="quantity-input w-full text-lg sm:text-base h-12 sm:h-10"
+                      min="1"
+                      required
+                    />
+                  </div>
+                  <div className="flex-1 sm:w-24">
+                    <select
+                      value={unit}
+                      onChange={(e) => setUnit(e.target.value)}
+                      className="unit-select w-full text-lg sm:text-base h-12 sm:h-10"
+                    >
+                      <option value={isLiquidFood(foodQuery) ? 'ml' : 'g'}>
+                        {isLiquidFood(foodQuery) ? 'ml' : 'g'}
+                      </option>
+                      <option value="oz">ounces</option>
+                    </select>
+                  </div>
                 </div>
-                <div className="w-24">
-                  <select
-                    value={unit}
-                    onChange={(e) => setUnit(e.target.value)}
-                    className="unit-select"
-                  >
-                    <option value={isLiquidFood(foodQuery) ? 'ml' : 'g'}>
-                      {isLiquidFood(foodQuery) ? 'ml' : 'g'}
-                    </option>
-                    <option value="oz">ounces</option>
-                  </select>
-                </div>
-              <button
-                type="submit"
-                className="px-8 py-3 bg-green-800 hover:bg-green-900 text-white font-bold rounded-lg shadow-lg transition-all duration-200 hover:scale-105 focus:ring-4 focus:ring-green-700 focus:ring-opacity-50"
-              >
-                {loading ? (
-                  <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto" />
-                ) : (
-                  'Get Nutrition'
-                )}
-              </button>
-            </div>
-          </form>
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto px-8 py-4 sm:py-3 bg-green-800 hover:bg-green-900 text-white font-bold rounded-lg shadow-lg transition-all duration-200 hover:scale-105 focus:ring-4 focus:ring-green-700 focus:ring-opacity-50 text-lg sm:text-base"
+                >
+                  {loading ? (
+                    <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto" />
+                  ) : (
+                    'Search'
+                  )}
+                </button>
+              </div>
+            </form>
 
-          {error && (
+            {error && (
               <div className="text-error text-sm font-medium px-4 py-2 bg-error/10 rounded-lg">
-              {error}
-            </div>
-          )}
+                {error}
+              </div>
+            )}
 
             {/* Results Section */}
             {nutritionData && (
@@ -528,7 +530,7 @@ export default function Home() {
                 </div>
               </div>
             )}
-            </div>
+          </div>
         </div>
       </div>
     </main>
