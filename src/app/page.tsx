@@ -212,15 +212,15 @@ export default function Home() {
                   />
                   
                   {suggestions.length > 0 && showSuggestions && (
-                    <div className="search-results fixed sm:absolute left-2 right-2 sm:left-0 sm:right-0 sm:relative z-50">
+                    <div className="search-results fixed sm:absolute left-2 right-2 sm:left-0 sm:right-0 sm:relative z-50 bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg">
                       {suggestions.map((suggestion, index) => (
                         <div
                           key={index}
-                          className="search-result-item p-4 sm:p-3 text-base sm:text-sm"
+                          className="search-result-item p-4 sm:p-3 text-base sm:text-sm border-b border-amber-100 dark:border-amber-900/20"
                           onClick={() => handleSuggestionClick(suggestion)}
                         >
-                          <span className="font-medium text-primary block sm:inline">{suggestion.name}</span>
-                          <span className="text-sm text-gray-500 dark:text-gray-400 block sm:inline sm:ml-2">
+                          <span className="font-medium text-slate-900 dark:text-white block sm:inline">{suggestion.name}</span>
+                          <span className="text-sm text-slate-600 dark:text-slate-300 block sm:inline sm:ml-2">
                             (100 {isLiquidFood(suggestion.name) ? 'ml' : 'g'})
                           </span>
                         </div>

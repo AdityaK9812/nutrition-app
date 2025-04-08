@@ -623,7 +623,8 @@ body {
 }
 
 .input-modern {
-  @apply px-4 py-3 bg-white dark:bg-slate-800 rounded-xl transition-all duration-300 ease-in-out;
+  @apply px-4 py-3 bg-white dark:bg-slate-800 rounded-xl transition-all duration-300 ease-in-out
+         text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -631,17 +632,22 @@ body {
 }
 
 .input-modern:focus {
-  @apply outline-none ring-2;
+  @apply outline-none ring-2 ring-amber-500/50 dark:ring-amber-400/50;
   transform: translateY(-1px);
 }
 
 .quantity-input, .unit-select {
   @apply px-4 py-3 bg-white dark:bg-slate-800 rounded-xl border border-amber-200 
-         dark:border-amber-900/30 transition-all duration-300 ease-in-out text-center;
+         dark:border-amber-900/30 transition-all duration-300 ease-in-out text-center
+         text-slate-900 dark:text-white;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   font-size: 16px; /* Prevent zoom on mobile */
+}
+
+.quantity-input:focus, .unit-select:focus {
+  @apply outline-none ring-2 ring-amber-500/50 dark:ring-amber-400/50 border-amber-500 dark:border-amber-400;
 }
 
 .quantity-input::-webkit-inner-spin-button,
@@ -655,8 +661,8 @@ body {
 }
 
 .search-results {
-  @apply bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-amber-100 
-         dark:border-amber-900/20 divide-y divide-amber-100 dark:divide-amber-900/20;
+  @apply bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg rounded-xl shadow-lg 
+         border border-amber-100 dark:border-amber-900/20;
   max-height: 60vh;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -696,6 +702,10 @@ body {
   /* Prevent body scroll when search results are shown */
   body.results-shown {
     overflow: hidden;
+  }
+
+  .macro-card {
+    @apply shadow-md;
   }
 }
 
@@ -1019,4 +1029,8 @@ body {
 .animate-fade-in-up {
   position: relative;
   z-index: 25;
+}
+
+.macro-card {
+  @apply transition-all duration-300 hover:transform hover:scale-105;
 }
