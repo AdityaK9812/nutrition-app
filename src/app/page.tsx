@@ -72,6 +72,14 @@ export default function Home() {
     }
   }, [foodQuery]);
 
+  useEffect(() => {
+    if (showSuggestions && suggestions.length > 0) {
+      document.body.classList.add('results-shown');
+    } else {
+      document.body.classList.remove('results-shown');
+    }
+  }, [showSuggestions, suggestions.length]);
+
   const fetchSuggestions = async (searchQuery: string) => {
     if (!searchQuery) {
       setSuggestions([]);
@@ -118,6 +126,7 @@ export default function Home() {
     setShowSuggestions(false);
     setQuantity('100');
     setUnit(isLiquidFood(suggestion.name) ? 'ml' : 'g');
+    document.body.classList.remove('results-shown');
   };
 
   const handleSearch = async (e: FormEvent) => {
@@ -188,8 +197,8 @@ export default function Home() {
           </div>
 
           {/* Search Section with stronger backdrop */}
-          <div className="space-y-8">
-            <form onSubmit={handleSearch} className="search-container p-4 sm:p-6 rounded-2xl shadow-lg bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg border border-amber-100 dark:border-amber-900/20">
+          <div className="space-y-4 sm:space-y-8">
+            <form onSubmit={handleSearch} className="search-container mx-2 sm:mx-0 p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg border border-amber-100 dark:border-amber-900/20">
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex-1 min-w-0 relative">
                   <input
@@ -198,16 +207,16 @@ export default function Home() {
                     onChange={handleQueryChange}
                     onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                     placeholder="Search for any food..."
-                    className="input-modern w-full rounded-xl text-lg sm:text-base border-amber-200 dark:border-amber-900/30 focus:border-amber-500 dark:focus:border-amber-700 focus:ring-amber-500 dark:focus:ring-amber-700"
+                    className="input-modern w-full h-14 sm:h-11 text-base sm:text-sm rounded-xl border-amber-200 dark:border-amber-900/30 focus:border-amber-500 dark:focus:border-amber-700 focus:ring-amber-500 dark:focus:ring-amber-700"
                     required
                   />
                   
                   {suggestions.length > 0 && showSuggestions && (
-                    <div className="search-results absolute z-20 w-full mt-2 max-h-60 overflow-y-auto rounded-lg shadow-xl">
+                    <div className="search-results fixed sm:absolute left-2 right-2 sm:left-0 sm:right-0 sm:relative z-50">
                       {suggestions.map((suggestion, index) => (
                         <div
                           key={index}
-                          className="search-result-item p-4 sm:p-3"
+                          className="search-result-item p-4 sm:p-3 text-base sm:text-sm"
                           onClick={() => handleSuggestionClick(suggestion)}
                         >
                           <span className="font-medium text-primary block sm:inline">{suggestion.name}</span>
@@ -225,7 +234,7 @@ export default function Home() {
                       type="number"
                       value={quantity}
                       onChange={(e) => setQuantity(e.target.value)}
-                      className="quantity-input w-full text-lg sm:text-base h-12 sm:h-10"
+                      className="quantity-input w-full h-14 sm:h-11 text-base sm:text-sm"
                       min="1"
                       required
                     />
@@ -234,7 +243,7 @@ export default function Home() {
                     <select
                       value={unit}
                       onChange={(e) => setUnit(e.target.value)}
-                      className="unit-select w-full text-lg sm:text-base h-12 sm:h-10"
+                      className="unit-select w-full h-14 sm:h-11 text-base sm:text-sm"
                     >
                       <option value={isLiquidFood(foodQuery) ? 'ml' : 'g'}>
                         {isLiquidFood(foodQuery) ? 'ml' : 'g'}
@@ -245,7 +254,7 @@ export default function Home() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-8 py-4 sm:py-3 bg-green-800 hover:bg-green-900 text-white font-bold rounded-lg shadow-lg transition-all duration-200 hover:scale-105 focus:ring-4 focus:ring-green-700 focus:ring-opacity-50 text-lg sm:text-base"
+                  className="w-full sm:w-auto h-14 sm:h-11 px-8 py-0 bg-green-800 hover:bg-green-900 text-white font-bold rounded-xl shadow-lg transition-all duration-200 hover:scale-105 focus:ring-4 focus:ring-green-700 focus:ring-opacity-50 text-base sm:text-sm"
                 >
                   {loading ? (
                     <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto" />

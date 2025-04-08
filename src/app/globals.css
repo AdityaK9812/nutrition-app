@@ -656,8 +656,9 @@ body {
 
 .search-results {
   @apply bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-amber-100 
-         dark:border-amber-900/20 divide-y divide-amber-100 dark:divide-amber-900/20
-         max-h-[60vh] overflow-y-auto;
+         dark:border-amber-900/20 divide-y divide-amber-100 dark:divide-amber-900/20;
+  max-height: 60vh;
+  overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
@@ -669,12 +670,13 @@ body {
   touch-action: manipulation;
 }
 
+/* Mobile-specific styles */
 @media (max-width: 640px) {
   .search-results {
     max-height: 50vh;
     position: fixed;
-    left: 1rem;
-    right: 1rem;
+    left: 0.5rem;
+    right: 0.5rem;
     bottom: auto;
     top: auto;
     z-index: 50;
@@ -689,6 +691,11 @@ body {
   .unit-select {
     @apply py-4;
     min-height: 48px; /* Better touch targets */
+  }
+
+  /* Prevent body scroll when search results are shown */
+  body.results-shown {
+    overflow: hidden;
   }
 }
 
