@@ -80,7 +80,7 @@ export default function Home() {
     
     try {
       const response = await fetch(
-        `http://localhost:5000/api/search?query=${encodeURIComponent(searchQuery.toLowerCase())}`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/search?query=${encodeURIComponent(searchQuery.toLowerCase())}`
       );
       const data = await response.json();
       // Filter out any entries with size indicators and remove duplicates
@@ -126,10 +126,9 @@ export default function Home() {
     setError('');
     
     try {
-      // Remove any size indicators from the query
       const cleanQuery = foodQuery.replace(/\s*\((Small|Medium|Large)\)/g, '');
       const response = await fetch(
-        `http://localhost:5000/api/nutrition?query=${encodeURIComponent(cleanQuery)}&quantity=${quantity}&unit=${unit}`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/nutrition?query=${encodeURIComponent(cleanQuery)}&quantity=${quantity}&unit=${unit}`
       );
       const data = await response.json();
       

@@ -239,12 +239,5 @@ def search_foods():
     return jsonify(matches)
 
 if __name__ == '__main__':
-    print("\nEndpoints:")
-    print("1. http://localhost:5000/ - Check server status")
-    print("2. http://localhost:5000/api/foods - List all foods")
-    print("3. http://localhost:5000/api/nutrition?query=apple - Get nutrition data")
-    print("4. http://localhost:5000/api/search?query=tea - Search foods")
-    
-    print("\nStarting server...")
-    # Start the Flask server
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)

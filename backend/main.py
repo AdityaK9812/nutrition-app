@@ -4,28 +4,33 @@ import json
 from typing import Optional, List
 from pydantic import BaseModel
 import os
+import uvicorn
 
 app = FastAPI()
 
-# Enable CORS
+# Configure CORS with environment variable
+CORS_ORIGIN = os.getenv('CORS_ORIGIN', '*')
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with your frontend URL
+    allow_origins=[CORS_ORIGIN],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Load food database
+current_dir = os.path.dirname(os.path.abspath(__file__))
+database_path = os.path.join(current_dir, 'food_database.json')
 try:
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    database_path = os.path.join(current_dir, 'food_database.json')
     with open(database_path, 'r', encoding='utf-8') as f:
         food_database = json.load(f)
+    print(f"Successfully loaded {len(food_database['foods'])} foods from database")
 except FileNotFoundError:
-    raise Exception("food_database.json not found. Please ensure the file exists in the backend directory.")
+    print(f"Error: food_database.json not found at {database_path}")
+    food_database = {"foods": []}
 except json.JSONDecodeError:
-    raise Exception("food_database.json is not valid JSON. Please check the file format.")
+    print("Error: Invalid JSON in food_database.json")
+    food_database = {"foods": []}
 
 class FoodItem(BaseModel):
     name: str
@@ -119,5 +124,5 @@ async def get_nutrition(query: str, quantity: float, unit: str) -> SearchResult:
     return SearchResult(**result)
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=5000) 
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port) 
