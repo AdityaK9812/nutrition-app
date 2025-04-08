@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { SearchResult } from '@/types';
 import Image from 'next/image';
 import { FormEvent } from 'react';
 
@@ -9,7 +8,7 @@ interface FoodItem {
   name: string;
   serving_size: number;
   serving_unit: string;
-  [key: string]: any;  // For other properties we might not use
+  [key: string]: string | number;  // Better typing for additional properties
 }
 
 interface NutritionData {
