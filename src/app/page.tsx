@@ -277,20 +277,20 @@ export default function Home() {
                 {/* Main Stats Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="stat-card bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-200">
-                    <div className="stat-value text-4xl font-bold text-amber-700 dark:text-amber-400">{nutritionData.calories}</div>
-                    <div className="stat-label text-base text-slate-900 dark:text-slate-100 mt-2 font-medium">Calories</div>
+                    <div className="stat-value text-2xl font-bold text-amber-700 dark:text-amber-400">{nutritionData.calories}</div>
+                    <div className="stat-label text-sm text-slate-900 dark:text-slate-100 mt-2 font-medium">Calories</div>
                   </div>
                   <div className="stat-card bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-200">
-                    <div className="stat-value text-4xl font-bold text-blue-700 dark:text-blue-400">{nutritionData.protein}g</div>
-                    <div className="stat-label text-base text-slate-900 dark:text-slate-100 mt-2 font-medium">Protein</div>
+                    <div className="stat-value text-2xl font-bold text-blue-700 dark:text-blue-400">{nutritionData.protein}g</div>
+                    <div className="stat-label text-sm text-slate-900 dark:text-slate-100 mt-2 font-medium">Protein</div>
                   </div>
                   <div className="stat-card bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-200">
-                    <div className="stat-value text-4xl font-bold text-yellow-700 dark:text-yellow-400">{nutritionData.carbs}g</div>
-                    <div className="stat-label text-base text-slate-900 dark:text-slate-100 mt-2 font-medium">Carbs</div>
+                    <div className="stat-value text-2xl font-bold text-yellow-700 dark:text-yellow-400">{nutritionData.carbs}g</div>
+                    <div className="stat-label text-sm text-slate-900 dark:text-slate-100 mt-2 font-medium">Carbs</div>
                   </div>
                   <div className="stat-card bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-200">
-                    <div className="stat-value text-4xl font-bold text-red-700 dark:text-red-400">{nutritionData.fat}g</div>
-                    <div className="stat-label text-base text-slate-900 dark:text-slate-100 mt-2 font-medium">Fat</div>
+                    <div className="stat-value text-2xl font-bold text-red-700 dark:text-red-400">{nutritionData.fat}g</div>
+                    <div className="stat-label text-sm text-slate-900 dark:text-slate-100 mt-2 font-medium">Fat</div>
                   </div>
                 </div>
 

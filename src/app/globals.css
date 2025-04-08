@@ -709,7 +709,7 @@ body {
   }
 
   .stat-value {
-    @apply text-3xl;
+    @apply text-2xl;
   }
 
   .stat-label {
@@ -789,11 +789,11 @@ body {
 }
 
 .stat-value {
-  @apply text-4xl font-bold;
+  @apply text-2xl font-bold;
 }
 
 .stat-label {
-  @apply text-base font-medium mt-2;
+  @apply text-sm font-medium mt-2;
 }
 
 .benefit-tag {
