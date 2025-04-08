@@ -212,15 +212,15 @@ export default function Home() {
                   />
                   
                   {suggestions.length > 0 && showSuggestions && (
-                    <div className="search-results fixed sm:absolute left-2 right-2 sm:left-0 sm:right-0 sm:relative z-50 bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg">
+                    <div className="search-results fixed sm:absolute left-2 right-2 sm:left-0 sm:right-0 sm:relative z-50 bg-white dark:bg-slate-800 shadow-xl">
                       {suggestions.map((suggestion, index) => (
                         <div
                           key={index}
-                          className="search-result-item p-4 sm:p-3 text-base sm:text-sm border-b border-amber-100 dark:border-amber-900/20"
+                          className="search-result-item p-4 sm:p-3 text-base sm:text-sm border-b border-gray-200 dark:border-gray-700"
                           onClick={() => handleSuggestionClick(suggestion)}
                         >
                           <span className="font-medium text-slate-900 dark:text-white block sm:inline">{suggestion.name}</span>
-                          <span className="text-sm text-slate-600 dark:text-slate-300 block sm:inline sm:ml-2">
+                          <span className="text-sm text-slate-700 dark:text-slate-300 block sm:inline sm:ml-2">
                             (100 {isLiquidFood(suggestion.name) ? 'ml' : 'g'})
                           </span>
                         </div>
@@ -277,20 +277,20 @@ export default function Home() {
                 {/* Main Stats Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="stat-card bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-200">
-                    <div className="stat-value text-4xl font-bold text-amber-600 dark:text-amber-400">{nutritionData.calories}</div>
-                    <div className="stat-label text-base text-gray-600 dark:text-gray-300 mt-2">Calories</div>
+                    <div className="stat-value text-4xl font-bold text-amber-700 dark:text-amber-400">{nutritionData.calories}</div>
+                    <div className="stat-label text-base text-slate-900 dark:text-slate-100 mt-2 font-medium">Calories</div>
                   </div>
                   <div className="stat-card bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-200">
-                    <div className="stat-value text-4xl font-bold text-blue-600 dark:text-blue-400">{nutritionData.protein}g</div>
-                    <div className="stat-label text-base text-gray-600 dark:text-gray-300 mt-2">Protein</div>
+                    <div className="stat-value text-4xl font-bold text-blue-700 dark:text-blue-400">{nutritionData.protein}g</div>
+                    <div className="stat-label text-base text-slate-900 dark:text-slate-100 mt-2 font-medium">Protein</div>
                   </div>
                   <div className="stat-card bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-200">
-                    <div className="stat-value text-4xl font-bold text-yellow-600 dark:text-yellow-400">{nutritionData.carbs}g</div>
-                    <div className="stat-label text-base text-gray-600 dark:text-gray-300 mt-2">Carbs</div>
+                    <div className="stat-value text-4xl font-bold text-yellow-700 dark:text-yellow-400">{nutritionData.carbs}g</div>
+                    <div className="stat-label text-base text-slate-900 dark:text-slate-100 mt-2 font-medium">Carbs</div>
                   </div>
                   <div className="stat-card bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-200">
-                    <div className="stat-value text-4xl font-bold text-red-600 dark:text-red-400">{nutritionData.fat}g</div>
-                    <div className="stat-label text-base text-gray-600 dark:text-gray-300 mt-2">Fat</div>
+                    <div className="stat-value text-4xl font-bold text-red-700 dark:text-red-400">{nutritionData.fat}g</div>
+                    <div className="stat-label text-base text-slate-900 dark:text-slate-100 mt-2 font-medium">Fat</div>
                   </div>
                 </div>
 

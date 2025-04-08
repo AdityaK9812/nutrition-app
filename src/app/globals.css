@@ -661,8 +661,8 @@ body {
 }
 
 .search-results {
-  @apply bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg rounded-xl shadow-lg 
-         border border-amber-100 dark:border-amber-900/20;
+  @apply bg-white dark:bg-slate-800 rounded-xl shadow-xl 
+         border border-gray-200 dark:border-gray-700;
   max-height: 60vh;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -671,8 +671,8 @@ body {
 
 .search-result-item {
   @apply px-4 py-3 cursor-pointer transition-colors duration-200
-         hover:bg-amber-50 dark:hover:bg-amber-900/10
-         active:bg-amber-100 dark:active:bg-amber-900/20;
+         hover:bg-gray-100 dark:hover:bg-slate-700
+         active:bg-gray-200 dark:active:bg-slate-600;
   touch-action: manipulation;
 }
 
@@ -704,8 +704,16 @@ body {
     overflow: hidden;
   }
 
-  .macro-card {
-    @apply shadow-md;
+  .stat-card {
+    @apply p-4;
+  }
+
+  .stat-value {
+    @apply text-3xl;
+  }
+
+  .stat-label {
+    @apply text-sm;
   }
 }
 
@@ -771,20 +779,21 @@ body {
 }
 
 .stat-card {
-  @apply p-6 rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl;
-  background: rgba(255, 255, 255, 0.9);
+  @apply bg-white dark:bg-slate-800 rounded-xl shadow-lg 
+         border border-gray-200 dark:border-gray-700
+         transition-all duration-300;
 }
 
-.dark .stat-card {
-  background: rgba(43, 9, 9, 0.9);
+.stat-card:hover {
+  @apply transform scale-105 shadow-xl;
 }
 
 .stat-value {
-  @apply text-2xl font-bold text-gray-800 dark:text-white;
+  @apply text-4xl font-bold;
 }
 
 .stat-label {
-  @apply text-sm text-gray-600 dark:text-gray-300 mt-1;
+  @apply text-base font-medium mt-2;
 }
 
 .benefit-tag {
@@ -938,12 +947,19 @@ body {
 
 /* Search Results */
 .search-results {
-  @apply bg-white/95 backdrop-blur-lg border border-[#0B4A0B]/10 rounded-xl shadow-lg;
+  @apply bg-white dark:bg-slate-800 rounded-xl shadow-xl 
+         border border-gray-200 dark:border-gray-700;
+  max-height: 60vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .search-result-item {
-  @apply px-4 py-2 cursor-pointer transition-colors duration-150
-         hover:bg-[#F4FFF4];
+  @apply px-4 py-3 cursor-pointer transition-colors duration-200
+         hover:bg-gray-100 dark:hover:bg-slate-700
+         active:bg-gray-200 dark:active:bg-slate-600;
+  touch-action: manipulation;
 }
 
 /* Animations */
@@ -989,15 +1005,12 @@ body {
 
 /* Search Results */
 .search-results {
-  @apply bg-white/95 backdrop-blur-lg border border-[#0B4A0B]/10 rounded-xl shadow-lg;
-  background: white;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  left: 0;
-  right: 0;
-  z-index: 35;
+  @apply bg-white dark:bg-slate-800 rounded-xl shadow-xl 
+         border border-gray-200 dark:border-gray-700;
+  max-height: 60vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 /* Button */
