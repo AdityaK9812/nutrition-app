@@ -2,8 +2,13 @@ services:
   - type: web
     name: nutrismart-api
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python test.py
+    buildCommand: |
+      pyenv install 3.8.18
+      pyenv global 3.8.18
+      pip install -r requirements.txt
+    startCommand: |
+      pyenv global 3.8.18
+      python test.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.8.18
