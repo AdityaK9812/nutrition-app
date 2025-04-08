@@ -2,15 +2,8 @@ services:
   - type: web
     name: nutrismart-api
     env: python
-    buildCommand: |
-      pyenv install 3.8.18
-      pyenv global 3.8.18
-      pip install -r requirements.txt
-    startCommand: |
-      pyenv global 3.8.18
-      python test.py
+    buildCommand: pip install -r requirements.txt
+    startCommand: python test.py
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.8.18
       - key: CORS_ORIGIN
         value: "https://nutrition-app-vercel-url.vercel.app" 
