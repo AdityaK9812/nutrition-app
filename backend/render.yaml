@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: nutrismart-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT test:app
+    envVars:
+      - key: CORS_ORIGIN
+        value: "https://nutrition-app-vercel-url.vercel.app" 

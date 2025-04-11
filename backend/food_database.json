@@ -1,0 +1,4711 @@
+{
+  "foods": [
+    {
+      "name": "Masala Dosa",
+      "calories": 170,
+      "protein": 3.8,
+      "carbs": 33.2,
+      "fat": 2.8,
+      "fiber": 2.4,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Indian",
+      "health_benefits": [
+        "Good source of carbohydrates",
+        "Contains fermented ingredients",
+        "Rich in fiber",
+        "Low in fat"
+      ],
+      "allergens": [
+        {
+          "name": "rice",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Oolong Tea",
+      "calories": 1,
+      "protein": 0,
+      "carbs": 0.2,
+      "fat": 0,
+      "fiber": 0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 5.8,
+      "category": "Beverages",
+      "health_benefits": [
+        "Rich in antioxidants",
+        "Supports metabolism",
+        "Contains L-theanine",
+        "May aid digestion"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Earl Grey Tea",
+      "calories": 1,
+      "protein": 0,
+      "carbs": 0.2,
+      "fat": 0,
+      "fiber": 0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 4.8,
+      "category": "Beverages",
+      "health_benefits": [
+        "Contains bergamot oil",
+        "Rich in antioxidants",
+        "May reduce stress",
+        "Supports heart health"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Idli",
+      "calories": 120,
+      "protein": 4.5,
+      "carbs": 24.0,
+      "fat": 0.4,
+      "fiber": 2.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Indian",
+      "health_benefits": [
+        "Low in fat",
+        "Easy to digest",
+        "Good source of carbs",
+        "Contains probiotics"
+      ],
+      "allergens": [
+        {
+          "name": "rice",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Sambar",
+      "calories": 105,
+      "protein": 5.8,
+      "carbs": 18.5,
+      "fat": 2.8,
+      "fiber": 4.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.5,
+      "category": "Indian",
+      "health_benefits": [
+        "Rich in protein",
+        "High in fiber",
+        "Contains lentils",
+        "Good source of vitamins"
+      ],
+      "allergens": [
+        {
+          "name": "lentils",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Green Tea",
+      "calories": 1,
+      "protein": 0,
+      "carbs": 0.2,
+      "fat": 0,
+      "fiber": 0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 7.2,
+      "category": "Beverages",
+      "health_benefits": [
+        "High in antioxidants",
+        "Boosts metabolism",
+        "Improves brain function",
+        "Supports heart health"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Classic Hamburger",
+      "calories": 250,
+      "protein": 15.0,
+      "carbs": 21.0,
+      "fat": 12.0,
+      "fiber": 1.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Burgers",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains iron",
+        "Provides vitamin B12",
+        "Source of zinc"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "soy",
+          "definite": false
+        },
+        {
+          "name": "milk",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Butter Chicken",
+      "calories": 280,
+      "protein": 20.0,
+      "carbs": 5.5,
+      "fat": 19.0,
+      "fiber": 1.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.0,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Contains healthy fats",
+        "Rich in vitamins",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Palak Paneer",
+      "calories": 180,
+      "protein": 11.0,
+      "carbs": 7.5,
+      "fat": 11.0,
+      "fiber": 4.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian",
+      "health_benefits": [
+        "Rich in iron",
+        "Good source of calcium",
+        "High in fiber",
+        "Contains antioxidants"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Chicken Biryani",
+      "calories": 265,
+      "protein": 16.5,
+      "carbs": 30.0,
+      "fat": 9.8,
+      "fiber": 2.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Indian",
+      "health_benefits": [
+        "Complete meal",
+        "Good source of protein",
+        "Contains essential spices",
+        "Rich in minerals"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Cheeseburger",
+      "calories": 280,
+      "protein": 15.5,
+      "carbs": 25.0,
+      "fat": 13.5,
+      "fiber": 1.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Burgers",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains calcium",
+        "Provides vitamin B12",
+        "Source of iron"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Double Cheeseburger",
+      "calories": 465,
+      "protein": 28.5,
+      "carbs": 29.8,
+      "fat": 25.6,
+      "fiber": 1.4,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.1,
+      "category": "Burgers",
+      "health_benefits": [
+        "High protein content",
+        "Rich in iron",
+        "Good source of zinc",
+        "Contains B vitamins"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "milk",
+          "definite": true
+        },
+        {
+          "name": "soy",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Chicken Burger",
+      "calories": 265,
+      "protein": 24.5,
+      "carbs": 25.8,
+      "fat": 8.5,
+      "fiber": 1.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Burgers",
+      "health_benefits": [
+        "Lean protein source",
+        "Lower in fat",
+        "Contains B vitamins",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Veggie Burger",
+      "calories": 228,
+      "protein": 12.8,
+      "carbs": 28.5,
+      "fat": 7.2,
+      "fiber": 5.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.9,
+      "category": "Burgers",
+      "health_benefits": [
+        "Plant-based protein",
+        "High in fiber",
+        "Contains vegetables",
+        "Lower in saturated fat"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "soy",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Margherita Pizza",
+      "calories": 235,
+      "protein": 9.5,
+      "carbs": 28.2,
+      "fat": 9.8,
+      "fiber": 1.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.5,
+      "category": "Pizza",
+      "health_benefits": [
+        "Contains lycopene",
+        "Source of calcium",
+        "Provides carbohydrates",
+        "Contains herbs"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Pepperoni Pizza",
+      "calories": 275,
+      "protein": 12.5,
+      "carbs": 27.8,
+      "fat": 12.8,
+      "fiber": 1.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.3,
+      "category": "Pizza",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains lycopene",
+        "Provides energy",
+        "Source of calcium"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Caesar Salad",
+      "calories": 165,
+      "protein": 7.5,
+      "carbs": 8.2,
+      "fat": 13.5,
+      "fiber": 2.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.5,
+      "category": "Salads",
+      "health_benefits": [
+        "Contains fresh vegetables",
+        "Good source of protein",
+        "Rich in vitamins",
+        "Contains healthy fats"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        },
+        {
+          "name": "eggs",
+          "definite": true
+        },
+        {
+          "name": "fish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Americano",
+      "calories": 8,
+      "protein": 0.1,
+      "carbs": 0.0,
+      "fat": 0.0,
+      "fiber": 0.0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 5.1,
+      "category": "Beverages",
+      "health_benefits": [
+        "Contains antioxidants",
+        "May boost metabolism",
+        "Can improve mental alertness",
+        "Zero calories"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Latte",
+      "calories": 42,
+      "protein": 3.4,
+      "carbs": 5.1,
+      "fat": 2.1,
+      "fiber": 0.0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 6.2,
+      "category": "Beverages",
+      "health_benefits": [
+        "Good source of calcium",
+        "Contains protein",
+        "Provides vitamin D",
+        "Contains antioxidants"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Cappuccino",
+      "calories": 40,
+      "protein": 3.3,
+      "carbs": 4.8,
+      "fat": 2.0,
+      "fiber": 0.0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 6.1,
+      "category": "Beverages",
+      "health_benefits": [
+        "Contains calcium",
+        "Good source of protein",
+        "Provides antioxidants",
+        "Contains vitamin B12"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Espresso",
+      "calories": 1,
+      "protein": 0.1,
+      "carbs": 0.0,
+      "fat": 0.0,
+      "fiber": 0.0,
+      "serving_size": 30,
+      "serving_unit": "ml",
+      "acidity_level": 5.4,
+      "category": "Beverages",
+      "health_benefits": [
+        "Rich in antioxidants",
+        "May improve physical performance",
+        "Contains essential nutrients",
+        "Zero calories"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Spaghetti Carbonara",
+      "calories": 365,
+      "protein": 14.5,
+      "carbs": 42.8,
+      "fat": 16.2,
+      "fiber": 2.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Italian",
+      "health_benefits": [
+        "Good source of protein",
+        "Provides energy",
+        "Contains vitamin B",
+        "Source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "eggs",
+          "definite": true
+        },
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Pad Thai",
+      "calories": 385,
+      "protein": 16.5,
+      "carbs": 52.5,
+      "fat": 14.2,
+      "fiber": 3.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.2,
+      "category": "Asian",
+      "health_benefits": [
+        "Contains protein",
+        "Rich in vegetables",
+        "Good source of minerals",
+        "Contains healthy fats"
+      ],
+      "allergens": [
+        {
+          "name": "peanuts",
+          "definite": true
+        },
+        {
+          "name": "soy",
+          "definite": true
+        },
+        {
+          "name": "fish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Chicken Burrito",
+      "calories": 295,
+      "protein": 20.5,
+      "carbs": 38.5,
+      "fat": 8.8,
+      "fiber": 7.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.2,
+      "category": "Mexican",
+      "health_benefits": [
+        "High in protein",
+        "Good source of fiber",
+        "Contains vegetables",
+        "Complete meal"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Beef Tacos",
+      "calories": 280,
+      "protein": 16.0,
+      "carbs": 26.0,
+      "fat": 14.0,
+      "fiber": 3.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.8,
+      "category": "Mexican",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains vegetables",
+        "Rich in iron",
+        "Source of fiber"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Chocolate Cake",
+      "calories": 400,
+      "protein": 5.0,
+      "carbs": 55.0,
+      "fat": 20.0,
+      "fiber": 2.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.5,
+      "category": "Desserts",
+      "health_benefits": [
+        "Contains antioxidants",
+        "Source of energy",
+        "Mood enhancer",
+        "Contains minerals"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "eggs",
+          "definite": true
+        },
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Sushi Roll",
+      "calories": 220,
+      "protein": 8.0,
+      "carbs": 38.0,
+      "fat": 4.0,
+      "fiber": 1.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.2,
+      "category": "Asian",
+      "health_benefits": [
+        "Contains omega-3",
+        "Good source of protein",
+        "Low in fat",
+        "Contains minerals"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        },
+        {
+          "name": "soy",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Greek Salad",
+      "calories": 150,
+      "protein": 4.0,
+      "carbs": 8.0,
+      "fat": 12.0,
+      "fiber": 3.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.0,
+      "category": "Salads",
+      "health_benefits": [
+        "Rich in vegetables",
+        "Contains healthy fats",
+        "Good source of vitamins",
+        "High in antioxidants"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Chicken Tikka Masala",
+      "calories": 290,
+      "protein": 20.0,
+      "carbs": 12.0,
+      "fat": 18.0,
+      "fiber": 2.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.6,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Contains spices",
+        "Rich in vitamins",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Miso Soup",
+      "calories": 40,
+      "protein": 2.5,
+      "carbs": 5.0,
+      "fat": 1.5,
+      "fiber": 1.0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 4.8,
+      "category": "Asian",
+      "health_benefits": [
+        "Contains probiotics",
+        "Low in calories",
+        "Good source of minerals",
+        "Contains antioxidants"
+      ],
+      "allergens": [
+        {
+          "name": "soy",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Chicken Noodle Soup",
+      "calories": 120,
+      "protein": 8.0,
+      "carbs": 15.0,
+      "fat": 3.5,
+      "fiber": 2.0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 5.5,
+      "category": "Soups",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains vegetables",
+        "Hydrating",
+        "Comforting food"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Pancakes",
+      "calories": 280,
+      "protein": 6.0,
+      "carbs": 45.0,
+      "fat": 9.0,
+      "fiber": 1.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.5,
+      "category": "Breakfast",
+      "health_benefits": [
+        "Quick energy source",
+        "Contains protein",
+        "Good source of carbs",
+        "Versatile food"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "eggs",
+          "definite": true
+        },
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "French Toast",
+      "calories": 260,
+      "protein": 8.0,
+      "carbs": 38.0,
+      "fat": 8.5,
+      "fiber": 1.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Breakfast",
+      "health_benefits": [
+        "Contains protein",
+        "Good source of energy",
+        "Contains calcium",
+        "Rich in vitamins"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "eggs",
+          "definite": true
+        },
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Trail Mix",
+      "calories": 480,
+      "protein": 15.0,
+      "carbs": 35.0,
+      "fat": 32.0,
+      "fiber": 6.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Snacks",
+      "health_benefits": [
+        "High in protein",
+        "Contains healthy fats",
+        "Good source of fiber",
+        "Rich in minerals"
+      ],
+      "allergens": [
+        {
+          "name": "tree nuts",
+          "definite": true
+        },
+        {
+          "name": "peanuts",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Hummus",
+      "calories": 180,
+      "protein": 8.0,
+      "carbs": 20.0,
+      "fat": 10.0,
+      "fiber": 6.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.8,
+      "category": "Snacks",
+      "health_benefits": [
+        "Plant-based protein",
+        "High in fiber",
+        "Contains healthy fats",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "sesame",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Fettuccine Alfredo",
+      "calories": 350,
+      "protein": 12.0,
+      "carbs": 42.0,
+      "fat": 16.0,
+      "fiber": 2.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Italian",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains calcium",
+        "Provides energy",
+        "Contains vitamin D"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Grilled Salmon",
+      "calories": 280,
+      "protein": 25.0,
+      "carbs": 0.0,
+      "fat": 18.0,
+      "fiber": 0.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.1,
+      "category": "Seafood",
+      "health_benefits": [
+        "Rich in omega-3",
+        "High in protein",
+        "Contains vitamin D",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Shrimp Scampi",
+      "calories": 240,
+      "protein": 18.0,
+      "carbs": 8.0,
+      "fat": 16.0,
+      "fiber": 1.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Contains omega-3",
+        "Low in carbs",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Beef Pho",
+      "calories": 220,
+      "protein": 15.0,
+      "carbs": 32.0,
+      "fat": 5.0,
+      "fiber": 2.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.2,
+      "category": "Asian",
+      "health_benefits": [
+        "Rich in protein",
+        "Contains herbs",
+        "Good source of minerals",
+        "Hydrating"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Falafel",
+      "calories": 220,
+      "protein": 8.0,
+      "carbs": 26.0,
+      "fat": 12.0,
+      "fiber": 4.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Mediterranean",
+      "health_benefits": [
+        "Plant-based protein",
+        "High in fiber",
+        "Contains herbs",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "sesame",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Tiramisu",
+      "calories": 340,
+      "protein": 6.0,
+      "carbs": 45.0,
+      "fat": 16.0,
+      "fiber": 0.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Desserts",
+      "health_benefits": [
+        "Contains protein",
+        "Source of energy",
+        "Contains calcium",
+        "Contains antioxidants"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "eggs",
+          "definite": true
+        },
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Matcha Latte",
+      "calories": 45,
+      "protein": 3.5,
+      "carbs": 5.5,
+      "fat": 2.2,
+      "fiber": 0.0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 6.8,
+      "category": "Beverages",
+      "health_benefits": [
+        "Rich in antioxidants",
+        "Contains L-theanine",
+        "Good source of calcium",
+        "Contains protein"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Tabbouleh",
+      "calories": 140,
+      "protein": 3.0,
+      "carbs": 24.0,
+      "fat": 7.0,
+      "fiber": 4.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.2,
+      "category": "Mediterranean",
+      "health_benefits": [
+        "Rich in herbs",
+        "High in fiber",
+        "Contains whole grains",
+        "Good source of vitamins"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Kung Pao Chicken",
+      "calories": 260,
+      "protein": 22.0,
+      "carbs": 12.0,
+      "fat": 14.0,
+      "fiber": 2.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.2,
+      "category": "Chinese",
+      "health_benefits": [
+        "High in protein",
+        "Contains vegetables",
+        "Rich in vitamins",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "peanuts",
+          "definite": true
+        },
+        {
+          "name": "soy",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Aloo Tikki",
+      "calories": 218,
+      "protein": 4.6,
+      "carbs": 27.3,
+      "fat": 9.8,
+      "fiber": 2.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Indian Fast Food",
+      "health_benefits": [
+        "Source of carbohydrates",
+        "Contains potatoes",
+        "Provides energy"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Aloo Chaat",
+      "calories": 194,
+      "protein": 2.5,
+      "carbs": 25.6,
+      "fat": 9.1,
+      "fiber": 3.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.5,
+      "category": "Indian Fast Food",
+      "health_benefits": [
+        "Contains potatoes",
+        "Source of carbohydrates",
+        "Rich in spices"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Bhel Puri",
+      "calories": 242,
+      "protein": 7.8,
+      "carbs": 38.5,
+      "fat": 8.2,
+      "fiber": 4.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.8,
+      "category": "Indian Fast Food",
+      "health_benefits": [
+        "Low in fat",
+        "Good source of fiber",
+        "Contains antioxidants",
+        "Rich in vitamins"
+      ],
+      "allergens": [
+        {
+          "name": "peanuts",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Bombay Sandwich",
+      "calories": 242,
+      "protein": 7.5,
+      "carbs": 38.2,
+      "fat": 8.5,
+      "fiber": 4.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.0,
+      "category": "Indian Fast Food",
+      "health_benefits": [
+        "Rich in vegetables",
+        "Contains fiber",
+        "Good source of vitamins",
+        "Low in calories"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Chana Bhatura",
+      "calories": 427,
+      "protein": 15.8,
+      "carbs": 52.3,
+      "fat": 19.5,
+      "fiber": 8.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian",
+      "health_benefits": [
+        "Rich in protein",
+        "High in fiber",
+        "Contains iron",
+        "Good source of folate"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Dabeli",
+      "calories": 256,
+      "protein": 7.2,
+      "carbs": 35.6,
+      "fat": 9.5,
+      "fiber": 5.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.2,
+      "category": "Indian Fast Food",
+      "health_benefits": [
+        "Contains spices",
+        "Rich in fiber",
+        "Provides energy"
+      ],
+      "allergens": [
+        {
+          "name": "peanuts",
+          "definite": true
+        },
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Dal Makhani",
+      "calories": 325,
+      "protein": 15.8,
+      "carbs": 35.2,
+      "fat": 14.5,
+      "fiber": 6.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Rich in fiber",
+        "Good source of iron",
+        "Contains folate"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Dhokla",
+      "calories": 160,
+      "protein": 6.5,
+      "carbs": 28.2,
+      "fat": 3.8,
+      "fiber": 4.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Low in fat",
+        "Good source of probiotics",
+        "Rich in vitamins"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Idli Sambar",
+      "calories": 160,
+      "protein": 6.5,
+      "carbs": 28.2,
+      "fat": 3.8,
+      "fiber": 4.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian",
+      "health_benefits": [
+        "Low in fat",
+        "Easy to digest",
+        "Good source of carbs",
+        "Contains probiotics"
+      ],
+      "allergens": [
+        {
+          "name": "rice",
+          "definite": true
+        },
+        {
+          "name": "lentils",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Kachori",
+      "calories": 308,
+      "protein": 7.5,
+      "carbs": 42.8,
+      "fat": 13.2,
+      "fiber": 2.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.4,
+      "category": "Indian",
+      "health_benefits": [
+        "Energy rich",
+        "Contains spices",
+        "Good source of carbs",
+        "Contains fiber"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Kathi Roll",
+      "calories": 295,
+      "protein": 14.5,
+      "carbs": 32.8,
+      "fat": 12.5,
+      "fiber": 3.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Indian Fast Food",
+      "health_benefits": [
+        "High in protein",
+        "Contains vegetables",
+        "Energy rich",
+        "Good source of iron"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "egg",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Lassi",
+      "calories": 150,
+      "protein": 5.8,
+      "carbs": 22.5,
+      "fat": 4.2,
+      "fiber": 0.0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 4.5,
+      "category": "Beverages",
+      "health_benefits": [
+        "Probiotic properties",
+        "Good source of calcium",
+        "Aids digestion",
+        "Contains vitamin B12"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Misal Pav",
+      "calories": 325,
+      "protein": 12.8,
+      "carbs": 45.5,
+      "fat": 11.2,
+      "fiber": 6.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.8,
+      "category": "Indian Fast Food",
+      "health_benefits": [
+        "High in protein",
+        "Rich in fiber",
+        "Contains iron",
+        "Good source of folate"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Momos",
+      "calories": 190,
+      "protein": 8.5,
+      "carbs": 25,
+      "fat": 7,
+      "fiber": 2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Indian Fast Food",
+      "health_benefits": [
+        "Contains protein",
+        "Source of energy",
+        "Can be steamed or fried"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Pani Puri",
+      "calories": 180,
+      "protein": 4.2,
+      "carbs": 32.5,
+      "fat": 3.8,
+      "fiber": 1.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.2,
+      "category": "Indian Fast Food",
+      "health_benefits": [
+        "Low in fat",
+        "Contains probiotics",
+        "Aids digestion",
+        "Rich in antioxidants"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Pav Bhaji",
+      "calories": 285,
+      "protein": 8.5,
+      "carbs": 45.2,
+      "fat": 9.8,
+      "fiber": 5.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.8,
+      "category": "Indian",
+      "health_benefits": [
+        "Rich in vegetables",
+        "Good source of fiber",
+        "Contains vitamins",
+        "Energy rich"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "milk",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Poha",
+      "calories": 265,
+      "protein": 7.2,
+      "carbs": 48.5,
+      "fat": 5.8,
+      "fiber": 3.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Indian",
+      "health_benefits": [
+        "Easy to digest",
+        "Good source of iron",
+        "Rich in carbs",
+        "Contains fiber"
+      ],
+      "allergens": [
+        {
+          "name": "peanuts",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Samosa",
+      "calories": 262,
+      "protein": 6.8,
+      "carbs": 35.5,
+      "fat": 12.5,
+      "fiber": 2.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Indian",
+      "health_benefits": [
+        "Contains vegetables",
+        "Good source of carbs",
+        "Energy rich",
+        "Contains spices"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Vada Pav",
+      "calories": 289,
+      "protein": 8.5,
+      "carbs": 42.3,
+      "fat": 10.8,
+      "fiber": 3.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.4,
+      "category": "Indian Fast Food",
+      "health_benefits": [
+        "Good source of carbs",
+        "Contains potatoes",
+        "Rich in spices",
+        "Energy boosting"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Chole Bhature",
+      "calories": 450,
+      "protein": 12.5,
+      "carbs": 65.2,
+      "fat": 18.5,
+      "fiber": 8.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Rich in fiber",
+        "Contains iron",
+        "Good source of folate"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Rajma Chawal",
+      "calories": 320,
+      "protein": 15.2,
+      "carbs": 45.8,
+      "fat": 8.5,
+      "fiber": 12.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Indian",
+      "health_benefits": [
+        "Complete protein source",
+        "High in fiber",
+        "Rich in iron",
+        "Good source of potassium"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Dosa (Plain)",
+      "calories": 180,
+      "protein": 4.2,
+      "carbs": 32.5,
+      "fat": 3.8,
+      "fiber": 2.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Indian",
+      "health_benefits": [
+        "Low in fat",
+        "Good source of carbs",
+        "Contains probiotics",
+        "Easy to digest"
+      ],
+      "allergens": [
+        {
+          "name": "rice",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Rava Dosa",
+      "calories": 195,
+      "protein": 4.5,
+      "carbs": 35.2,
+      "fat": 4.2,
+      "fiber": 2.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Indian",
+      "health_benefits": [
+        "Quick energy source",
+        "Contains fiber",
+        "Low in fat",
+        "Easy to digest"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Medu Vada",
+      "calories": 220,
+      "protein": 8.5,
+      "carbs": 25.8,
+      "fat": 9.5,
+      "fiber": 3.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Contains fiber",
+        "Good source of iron",
+        "Rich in B vitamins"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Upma",
+      "calories": 185,
+      "protein": 4.8,
+      "carbs": 32.5,
+      "fat": 5.2,
+      "fiber": 2.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Indian",
+      "health_benefits": [
+        "Good source of carbs",
+        "Contains fiber",
+        "Low in fat",
+        "Easy to digest"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Pongal",
+      "calories": 220,
+      "protein": 5.5,
+      "carbs": 38.5,
+      "fat": 6.2,
+      "fiber": 3.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Indian",
+      "health_benefits": [
+        "Good source of carbs",
+        "Contains protein",
+        "Rich in minerals",
+        "Easy to digest"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Masala Vada",
+      "calories": 235,
+      "protein": 9.2,
+      "carbs": 28.5,
+      "fat": 10.5,
+      "fiber": 4.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Rich in fiber",
+        "Contains iron",
+        "Good source of B vitamins"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Bisi Bele Bath",
+      "calories": 280,
+      "protein": 8.5,
+      "carbs": 45.2,
+      "fat": 8.8,
+      "fiber": 6.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Indian",
+      "health_benefits": [
+        "Complete meal",
+        "High in protein",
+        "Rich in fiber",
+        "Contains essential spices"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Kesari Bath",
+      "calories": 320,
+      "protein": 4.2,
+      "carbs": 55.8,
+      "fat": 9.5,
+      "fiber": 2.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.5,
+      "category": "Indian",
+      "health_benefits": [
+        "Quick energy source",
+        "Contains saffron",
+        "Rich in carbs",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "nuts",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Gulab Jamun",
+      "calories": 350,
+      "protein": 5.2,
+      "carbs": 45.8,
+      "fat": 15.5,
+      "fiber": 0.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.8,
+      "category": "Indian Desserts",
+      "health_benefits": [
+        "Quick energy source",
+        "Contains calcium",
+        "Rich in carbs",
+        "Good source of protein"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Rasgulla",
+      "calories": 186,
+      "protein": 4.5,
+      "carbs": 35.2,
+      "fat": 2.8,
+      "fiber": 0.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.5,
+      "category": "Indian Desserts",
+      "health_benefits": [
+        "Low in fat",
+        "Good source of calcium",
+        "Contains protein",
+        "Quick energy source"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Jalebi",
+      "calories": 420,
+      "protein": 2.5,
+      "carbs": 85.2,
+      "fat": 12.5,
+      "fiber": 0.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Indian Desserts",
+      "health_benefits": [
+        "Quick energy source",
+        "Contains saffron",
+        "Rich in carbs",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Kaju Katli",
+      "calories": 450,
+      "protein": 8.5,
+      "carbs": 35.8,
+      "fat": 32.5,
+      "fiber": 2.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.5,
+      "category": "Indian Desserts",
+      "health_benefits": [
+        "Rich in healthy fats",
+        "Contains protein",
+        "Good source of minerals",
+        "Contains antioxidants"
+      ],
+      "allergens": [
+        {
+          "name": "nuts",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Rasmalai",
+      "calories": 280,
+      "protein": 6.8,
+      "carbs": 35.5,
+      "fat": 12.5,
+      "fiber": 0.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.8,
+      "category": "Indian Desserts",
+      "health_benefits": [
+        "Good source of calcium",
+        "Contains protein",
+        "Rich in vitamins",
+        "Quick energy source"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Besan Ladoo",
+      "calories": 380,
+      "protein": 8.2,
+      "carbs": 45.5,
+      "fat": 18.5,
+      "fiber": 3.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.5,
+      "category": "Indian Desserts",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains fiber",
+        "Rich in minerals",
+        "Energy rich"
+      ],
+      "allergens": [
+        {
+          "name": "nuts",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Kheer",
+      "calories": 220,
+      "protein": 5.5,
+      "carbs": 35.8,
+      "fat": 6.5,
+      "fiber": 0.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.8,
+      "category": "Indian Desserts",
+      "health_benefits": [
+        "Good source of calcium",
+        "Contains protein",
+        "Rich in vitamins",
+        "Easy to digest"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        },
+        {
+          "name": "nuts",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Modak",
+      "calories": 180,
+      "protein": 2.5,
+      "carbs": 35.2,
+      "fat": 4.5,
+      "fiber": 1.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Indian Desserts",
+      "health_benefits": [
+        "Low in fat",
+        "Good source of carbs",
+        "Contains coconut",
+        "Energy rich"
+      ],
+      "allergens": [
+        {
+          "name": "coconut",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Sandesh",
+      "calories": 250,
+      "protein": 8.5,
+      "carbs": 25.8,
+      "fat": 12.5,
+      "fiber": 0.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.5,
+      "category": "Indian Desserts",
+      "health_benefits": [
+        "Good source of calcium",
+        "Contains protein",
+        "Rich in vitamins",
+        "Easy to digest"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Peda",
+      "calories": 380,
+      "protein": 6.8,
+      "carbs": 45.5,
+      "fat": 18.5,
+      "fiber": 0.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.8,
+      "category": "Indian Desserts",
+      "health_benefits": [
+        "Good source of calcium",
+        "Contains protein",
+        "Rich in vitamins",
+        "Energy rich"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Aloo Paratha",
+      "calories": 234,
+      "protein": 6.3,
+      "carbs": 39.2,
+      "fat": 6.8,
+      "fiber": 3.4,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.5,
+      "category": "Indian",
+      "health_benefits": [
+        "Good source of carbs",
+        "Contains vitamin C",
+        "Provides dietary fiber",
+        "Rich in potassium"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Paneer Tikka",
+      "calories": 262,
+      "protein": 18.4,
+      "carbs": 3.6,
+      "fat": 19.8,
+      "fiber": 0.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Rich in calcium",
+        "Contains vitamin D",
+        "Low in carbs"
+      ],
+      "allergens": [
+        {
+          "name": "dairy",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Tandoori Chicken",
+      "calories": 209,
+      "protein": 30.2,
+      "carbs": 2.1,
+      "fat": 8.4,
+      "fiber": 0.3,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.7,
+      "category": "Indian",
+      "health_benefits": [
+        "Very high in protein",
+        "Low in carbs",
+        "Rich in vitamin B6",
+        "Good source of niacin"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Poori",
+      "calories": 296,
+      "protein": 5.9,
+      "carbs": 40.3,
+      "fat": 12.4,
+      "fiber": 2.3,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.7,
+      "category": "Indian",
+      "health_benefits": [
+        "Good source of energy",
+        "Contains essential fats",
+        "Provides quick energy",
+        "Contains B vitamins"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Papdi Chaat",
+      "calories": 237,
+      "protein": 5.4,
+      "carbs": 36.2,
+      "fat": 8.3,
+      "fiber": 3.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.2,
+      "category": "Indian",
+      "health_benefits": [
+        "Contains probiotics from yogurt",
+        "Rich in antioxidants",
+        "Good source of carbs",
+        "Contains diverse nutrients"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "dairy",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Dahi Vada",
+      "calories": 172,
+      "protein": 8.4,
+      "carbs": 21.3,
+      "fat": 6.5,
+      "fiber": 4.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.6,
+      "category": "Indian",
+      "health_benefits": [
+        "Contains probiotics",
+        "Good source of protein",
+        "Aids digestion",
+        "Rich in calcium"
+      ],
+      "allergens": [
+        {
+          "name": "lentils",
+          "definite": true
+        },
+        {
+          "name": "dairy",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Chicken Tikka",
+      "calories": 218,
+      "protein": 27.8,
+      "carbs": 3.2,
+      "fat": 10.5,
+      "fiber": 0.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Low in carbs",
+        "Rich in B vitamins",
+        "Good source of selenium"
+      ],
+      "allergens": [
+        {
+          "name": "dairy",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Kadhi Pakora",
+      "calories": 187,
+      "protein": 6.8,
+      "carbs": 19.3,
+      "fat": 9.5,
+      "fiber": 2.1,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.7,
+      "category": "Indian",
+      "health_benefits": [
+        "Contains probiotics",
+        "Good source of protein",
+        "Rich in calcium",
+        "Contains antioxidants"
+      ],
+      "allergens": [
+        {
+          "name": "dairy",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Aloo Gobi",
+      "calories": 121,
+      "protein": 3.2,
+      "carbs": 18.7,
+      "fat": 4.5,
+      "fiber": 3.9,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian",
+      "health_benefits": [
+        "Rich in vitamin C",
+        "Good source of fiber",
+        "Contains antioxidants",
+        "Low in calories"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Shahi Paneer",
+      "calories": 276,
+      "protein": 16.5,
+      "carbs": 7.8,
+      "fat": 20.3,
+      "fiber": 1.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.1,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Rich in calcium",
+        "Contains vitamin D",
+        "Good source of healthy fats"
+      ],
+      "allergens": [
+        {
+          "name": "dairy",
+          "definite": true
+        },
+        {
+          "name": "nuts",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Kofta Curry",
+      "calories": 240,
+      "protein": 10.2,
+      "carbs": 14.5,
+      "fat": 16.8,
+      "fiber": 3.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Indian",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains essential fats",
+        "Rich in antioxidants",
+        "Provides vitamin A"
+      ],
+      "allergens": [
+        {
+          "name": "dairy",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Gajar Ka Halwa",
+      "calories": 245,
+      "protein": 4.1,
+      "carbs": 32.6,
+      "fat": 11.7,
+      "fiber": 3.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.4,
+      "category": "Indian",
+      "health_benefits": [
+        "Rich in vitamin A",
+        "Good source of fiber",
+        "Contains antioxidants",
+        "Provides essential fats"
+      ],
+      "allergens": [
+        {
+          "name": "dairy",
+          "definite": true
+        },
+        {
+          "name": "nuts",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Khichdi",
+      "calories": 175,
+      "protein": 7.5,
+      "carbs": 30.8,
+      "fat": 3.2,
+      "fiber": 4.3,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Indian",
+      "health_benefits": [
+        "Easy to digest",
+        "Complete protein when combined",
+        "Good source of carbs",
+        "Contains essential amino acids"
+      ],
+      "allergens": [
+        {
+          "name": "rice",
+          "definite": true
+        },
+        {
+          "name": "lentils",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Paratha",
+      "calories": 260,
+      "protein": 6.8,
+      "carbs": 43.2,
+      "fat": 7.5,
+      "fiber": 2.9,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.5,
+      "category": "Indian",
+      "health_benefits": [
+        "Good source of carbs",
+        "Contains B vitamins",
+        "Provides essential fats",
+        "Source of energy"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Dal Makhani",
+      "calories": 198,
+      "protein": 10.5,
+      "carbs": 23.8,
+      "fat": 6.7,
+      "fiber": 8.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.9,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Rich in fiber",
+        "Good source of iron",
+        "Contains plant-based protein"
+      ],
+      "allergens": [
+        {
+          "name": "lentils",
+          "definite": true
+        },
+        {
+          "name": "dairy",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Baingan Bharta",
+      "calories": 114,
+      "protein": 2.8,
+      "carbs": 15.6,
+      "fat": 5.2,
+      "fiber": 5.3,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.4,
+      "category": "Indian",
+      "health_benefits": [
+        "Low in calories",
+        "Rich in fiber",
+        "Contains antioxidants",
+        "Good source of potassium"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Rogan Josh",
+      "calories": 234,
+      "protein": 18.6,
+      "carbs": 5.3,
+      "fat": 16.2,
+      "fiber": 1.7,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.7,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Contains iron",
+        "Rich in B vitamins",
+        "Good source of zinc"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Malai Kofta",
+      "calories": 258,
+      "protein": 7.8,
+      "carbs": 12.5,
+      "fat": 20.2,
+      "fiber": 2.4,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.3,
+      "category": "Indian",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains calcium",
+        "Rich in healthy fats",
+        "Provides vitamin D"
+      ],
+      "allergens": [
+        {
+          "name": "dairy",
+          "definite": true
+        },
+        {
+          "name": "nuts",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Uttapam",
+      "calories": 175,
+      "protein": 5.2,
+      "carbs": 32.4,
+      "fat": 2.8,
+      "fiber": 3.7,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.9,
+      "category": "Indian",
+      "health_benefits": [
+        "Contains fermented ingredients",
+        "Rich in probiotics",
+        "Good source of carbs",
+        "Low in fat"
+      ],
+      "allergens": [
+        {
+          "name": "rice",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Vegetable Manchurian",
+      "calories": 182,
+      "protein": 4.8,
+      "carbs": 18.7,
+      "fat": 10.2,
+      "fiber": 4.1,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Indo-Chinese",
+      "health_benefits": [
+        "Contains mixed vegetables",
+        "Rich in fiber",
+        "Good source of minerals",
+        "Contains antioxidants"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": false
+        },
+        {
+          "name": "soy",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Hakka Noodles",
+      "calories": 237,
+      "protein": 7.2,
+      "carbs": 42.5,
+      "fat": 4.8,
+      "fiber": 2.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.4,
+      "category": "Indo-Chinese",
+      "health_benefits": [
+        "Good source of carbs",
+        "Contains essential amino acids",
+        "Provides energy",
+        "Contains vegetables"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "soy",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Chilli Paneer",
+      "calories": 218,
+      "protein": 15.6,
+      "carbs": 8.7,
+      "fat": 14.2,
+      "fiber": 1.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.3,
+      "category": "Indo-Chinese",
+      "health_benefits": [
+        "High in protein",
+        "Rich in calcium",
+        "Contains vitamin D",
+        "Good source of capsaicin"
+      ],
+      "allergens": [
+        {
+          "name": "dairy",
+          "definite": true
+        },
+        {
+          "name": "soy",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Gobi Manchurian",
+      "calories": 165,
+      "protein": 3.8,
+      "carbs": 16.7,
+      "fat": 9.8,
+      "fiber": 3.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.6,
+      "category": "Indo-Chinese",
+      "health_benefits": [
+        "Contains vitamin C",
+        "Good source of fiber",
+        "Contains antioxidants",
+        "Rich in minerals"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": false
+        },
+        {
+          "name": "soy",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Spaghetti Bolognese",
+      "calories": 382,
+      "protein": 22.1,
+      "carbs": 45.6,
+      "fat": 13.2,
+      "fiber": 4.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.8,
+      "category": "Italian",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains lycopene from tomatoes",
+        "Provides complex carbohydrates",
+        "Source of B vitamins"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "dairy",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Penne Arrabbiata",
+      "calories": 320,
+      "protein": 10.5,
+      "carbs": 54.2,
+      "fat": 7.8,
+      "fiber": 3.9,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.3,
+      "category": "Italian",
+      "health_benefits": [
+        "Contains lycopene from tomatoes",
+        "Capsaicin from chili offers anti-inflammatory benefits",
+        "Good source of complex carbohydrates",
+        "Low in fat"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Linguine alle Vongole",
+      "calories": 298,
+      "protein": 15.2,
+      "carbs": 42.6,
+      "fat": 6.4,
+      "fiber": 2.1,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Italian",
+      "health_benefits": [
+        "Rich in omega-3 fatty acids",
+        "Good source of protein",
+        "Contains minerals from clams",
+        "Source of vitamin B12"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "shellfish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Lasagna",
+      "calories": 371,
+      "protein": 18.4,
+      "carbs": 36.8,
+      "fat": 16.3,
+      "fiber": 2.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.2,
+      "category": "Italian",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains calcium from cheese",
+        "Provides vitamin A",
+        "Source of iron"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "dairy",
+          "definite": true
+        },
+        {
+          "name": "egg",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Gnocchi",
+      "calories": 201,
+      "protein": 6.3,
+      "carbs": 40.2,
+      "fat": 1.5,
+      "fiber": 2.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.5,
+      "category": "Italian",
+      "health_benefits": [
+        "Good source of carbohydrates",
+        "Low in fat",
+        "Contains potassium from potatoes",
+        "Source of vitamin C"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "egg",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Tortellini",
+      "calories": 326,
+      "protein": 14.8,
+      "carbs": 45.9,
+      "fat": 10.2,
+      "fiber": 1.9,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.7,
+      "category": "Italian",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains folate",
+        "Provides iron",
+        "Source of complex carbohydrates"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "egg",
+          "definite": true
+        },
+        {
+          "name": "dairy",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Ravioli",
+      "calories": 296,
+      "protein": 12.7,
+      "carbs": 42.2,
+      "fat": 8.4,
+      "fiber": 2.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.3,
+      "category": "Italian",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains calcium from cheese fillings",
+        "Provides B vitamins",
+        "Source of complex carbohydrates"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "egg",
+          "definite": true
+        },
+        {
+          "name": "dairy",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Orecchiette con Cime di Rapa",
+      "calories": 284,
+      "protein": 9.8,
+      "carbs": 48.6,
+      "fat": 6.2,
+      "fiber": 5.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.9,
+      "category": "Italian",
+      "health_benefits": [
+        "Rich in vitamin K",
+        "Good source of vitamin C",
+        "Contains calcium",
+        "High in fiber"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Farfalle al Pesto",
+      "calories": 352,
+      "protein": 11.3,
+      "carbs": 43.7,
+      "fat": 15.6,
+      "fiber": 2.9,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.7,
+      "category": "Italian",
+      "health_benefits": [
+        "Contains omega-3 fatty acids from pine nuts",
+        "Rich in antioxidants from basil",
+        "Good source of vitamin K",
+        "Provides calcium"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "dairy",
+          "definite": true
+        },
+        {
+          "name": "tree nuts",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Bucatini all'Amatriciana",
+      "calories": 367,
+      "protein": 14.8,
+      "carbs": 47.2,
+      "fat": 12.5,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.5,
+      "category": "Italian",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains lycopene from tomatoes",
+        "Provides vitamin C",
+        "Source of B vitamins"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "dairy",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Pappardelle al Ragù",
+      "calories": 374,
+      "protein": 21.6,
+      "carbs": 44.3,
+      "fat": 12.8,
+      "fiber": 3.7,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.1,
+      "category": "Italian",
+      "health_benefits": [
+        "High in protein",
+        "Good source of iron",
+        "Contains vitamin B12",
+        "Provides zinc"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "egg",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Risotto alla Milanese",
+      "calories": 346,
+      "protein": 8.7,
+      "carbs": 51.3,
+      "fat": 12.4,
+      "fiber": 0.9,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.4,
+      "category": "Italian",
+      "health_benefits": [
+        "Contains saffron with antioxidant properties",
+        "Good source of complex carbohydrates",
+        "Provides calcium",
+        "Source of vitamin D"
+      ],
+      "allergens": [
+        {
+          "name": "dairy",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Spaghetti Aglio e Olio",
+      "calories": 296,
+      "protein": 8.4,
+      "carbs": 49.2,
+      "fat": 8.7,
+      "fiber": 2.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.6,
+      "category": "Italian",
+      "health_benefits": [
+        "Contains heart-healthy olive oil",
+        "Garlic has antimicrobial properties",
+        "Good source of complex carbohydrates",
+        "Low in saturated fat"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Lay's Classic Potato Chips",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some fiber",
+        "Low in sugar",
+        "Contains potassium"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Doritos Nacho Cheese",
+      "calories": 500,
+      "protein": 7.1,
+      "carbs": 60.7,
+      "fat": 25,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Cheetos Crunchy",
+      "calories": 571,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 35.7,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.1,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Pringles Original",
+      "calories": 536,
+      "protein": 5.4,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.3,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Ruffles Original",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Fritos Original",
+      "calories": 571,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 35.7,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.1,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Tostitos Original",
+      "calories": 500,
+      "protein": 7.1,
+      "carbs": 60.7,
+      "fat": 25,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Sun Chips Original",
+      "calories": 464,
+      "protein": 7.1,
+      "carbs": 60.7,
+      "fat": 21.4,
+      "fiber": 7.1,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.4,
+      "category": "Snacks",
+      "health_benefits": [
+        "Good source of fiber",
+        "Contains whole grains",
+        "Source of quick energy",
+        "Contains some protein"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Popchips Sea Salt",
+      "calories": 429,
+      "protein": 5.4,
+      "carbs": 60.7,
+      "fat": 17.9,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.3,
+      "category": "Snacks",
+      "health_benefits": [
+        "Lower in fat than traditional chips",
+        "Source of quick energy",
+        "Contains some protein",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Kettle Brand Sea Salt",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Terra Original",
+      "calories": 500,
+      "protein": 5.4,
+      "carbs": 53.6,
+      "fat": 28.6,
+      "fiber": 5.4,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.1,
+      "category": "Snacks",
+      "health_benefits": [
+        "Made from root vegetables",
+        "Source of quick energy",
+        "Contains some fiber",
+        "Contains some protein"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Sensible Portions Garden Veggie Straws",
+      "calories": 464,
+      "protein": 3.6,
+      "carbs": 60.7,
+      "fat": 21.4,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Snacks",
+      "health_benefits": [
+        "Made with vegetables",
+        "Source of quick energy",
+        "Lower in fat than traditional chips",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Herr's Ketchup",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.5,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Utz Regular",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Wise Onion & Garlic",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.1,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Zapp's Voodoo",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Boulder Canyon Avocado Oil",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Snacks",
+      "health_benefits": [
+        "Cooked in avocado oil",
+        "Source of quick energy",
+        "Contains some protein",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Deep River Snacks Aged Cheddar",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.1,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Cape Cod Original",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Tim's Cascade Style",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.1,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Good Health Avocado Oil",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Snacks",
+      "health_benefits": [
+        "Cooked in avocado oil",
+        "Source of quick energy",
+        "Contains some protein",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Route 11 Mama Zuma's Revenge",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Miss Vickie's Sea Salt",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Paqui Haunted Ghost Pepper",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.0,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Snyder's of Hanover Pretzel Pieces",
+      "calories": 500,
+      "protein": 7.1,
+      "carbs": 60.7,
+      "fat": 25,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Herr's Cheese Curls",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.1,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Utz Red Hot",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Wise Ridges Sour Cream & Onion",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.1,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Zapp's Cajun Dill",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Boulder Canyon Olive Oil",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Snacks",
+      "health_benefits": [
+        "Cooked in olive oil",
+        "Source of quick energy",
+        "Contains some protein",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Deep River Snacks Sweet Maui Onion",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.1,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Cape Cod Sweet & Spicy Jalapeño",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Tim's Cascade Jalapeño",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.5,
+      "category": "Snacks",
+      "health_benefits": [
+        "Source of quick energy",
+        "Contains some protein",
+        "Low in sugar",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Good Health Olive Oil",
+      "calories": 536,
+      "protein": 7.1,
+      "carbs": 53.6,
+      "fat": 32.1,
+      "fiber": 3.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Snacks",
+      "health_benefits": [
+        "Cooked in olive oil",
+        "Source of quick energy",
+        "Contains some protein",
+        "Contains some fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Fish Curry (Indian Style)",
+      "calories": 165,
+      "protein": 19.5,
+      "carbs": 8.2,
+      "fat": 7.8,
+      "fiber": 2.1,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.2,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in omega-3 fatty acids",
+        "Rich in protein",
+        "Good source of vitamin D",
+        "Contains anti-inflammatory compounds"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        },
+        {
+          "name": "mustard",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Prawn Masala",
+      "calories": 142,
+      "protein": 18.2,
+      "carbs": 6.5,
+      "fat": 5.8,
+      "fiber": 1.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.4,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Low in calories",
+        "Rich in selenium",
+        "Good source of zinc"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Mango (Alphonso)",
+      "calories": 60,
+      "protein": 0.8,
+      "carbs": 15.0,
+      "fat": 0.4,
+      "fiber": 1.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.2,
+      "category": "Fruits",
+      "health_benefits": [
+        "High in vitamin C",
+        "Rich in antioxidants",
+        "Good source of fiber",
+        "Contains beta-carotene"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Fish Molee",
+      "calories": 158,
+      "protein": 20.5,
+      "carbs": 4.8,
+      "fat": 7.2,
+      "fiber": 1.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.6,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "Rich in protein",
+        "Contains healthy fats",
+        "Good source of vitamin B12",
+        "High in minerals"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        },
+        {
+          "name": "coconut",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Pomegranate",
+      "calories": 83,
+      "protein": 1.7,
+      "carbs": 18.7,
+      "fat": 1.2,
+      "fiber": 4.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 3.0,
+      "category": "Fruits",
+      "health_benefits": [
+        "High in antioxidants",
+        "Anti-inflammatory properties",
+        "Good for heart health",
+        "Rich in fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Crab Masala",
+      "calories": 165,
+      "protein": 22.5,
+      "carbs": 4.2,
+      "fat": 7.8,
+      "fiber": 0.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Rich in zinc",
+        "Good source of selenium",
+        "Contains omega-3 fatty acids"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Litchi",
+      "calories": 66,
+      "protein": 0.8,
+      "carbs": 16.5,
+      "fat": 0.4,
+      "fiber": 1.3,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.5,
+      "category": "Fruits",
+      "health_benefits": [
+        "High in vitamin C",
+        "Contains antioxidants",
+        "Good for skin health",
+        "Supports immune system"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Goan Fish Curry",
+      "calories": 172,
+      "protein": 21.0,
+      "carbs": 7.5,
+      "fat": 8.2,
+      "fiber": 2.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.8,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "Rich in protein",
+        "Contains omega-3 fatty acids",
+        "Good source of vitamin D",
+        "Anti-inflammatory properties"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Custard Apple",
+      "calories": 94,
+      "protein": 2.1,
+      "carbs": 23.6,
+      "fat": 0.6,
+      "fiber": 4.4,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.5,
+      "category": "Fruits",
+      "health_benefits": [
+        "Rich in vitamin C",
+        "Good source of fiber",
+        "Contains antioxidants",
+        "High in potassium"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Prawn Coconut Curry",
+      "calories": 185,
+      "protein": 19.8,
+      "carbs": 7.2,
+      "fat": 10.5,
+      "fiber": 2.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.6,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Contains healthy fats",
+        "Rich in minerals",
+        "Good source of iron"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        },
+        {
+          "name": "coconut",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Sapota (Chikoo)",
+      "calories": 83,
+      "protein": 0.7,
+      "carbs": 19.9,
+      "fat": 1.1,
+      "fiber": 5.3,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Fruits",
+      "health_benefits": [
+        "High in fiber",
+        "Rich in minerals",
+        "Good for digestion",
+        "Contains antioxidants"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Kerala Fish Fry",
+      "calories": 195,
+      "protein": 24.5,
+      "carbs": 8.5,
+      "fat": 9.2,
+      "fiber": 1.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.4,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Rich in omega-3",
+        "Good source of vitamin D",
+        "Contains essential minerals"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Dragon Fruit",
+      "calories": 60,
+      "protein": 1.2,
+      "carbs": 13.0,
+      "fat": 0.4,
+      "fiber": 3.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.8,
+      "category": "Fruits",
+      "health_benefits": [
+        "Rich in antioxidants",
+        "High in fiber",
+        "Good for immunity",
+        "Contains vitamin C"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Bombay Duck Fry",
+      "calories": 162,
+      "protein": 22.8,
+      "carbs": 6.5,
+      "fat": 7.2,
+      "fiber": 0.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.6,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Good source of vitamin B12",
+        "Rich in minerals",
+        "Contains omega-3"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Jackfruit (Ripe)",
+      "calories": 95,
+      "protein": 1.7,
+      "carbs": 23.2,
+      "fat": 0.6,
+      "fiber": 1.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.0,
+      "category": "Fruits",
+      "health_benefits": [
+        "Rich in vitamins",
+        "Good source of fiber",
+        "Contains antioxidants",
+        "High in potassium"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Tandoori Pomfret",
+      "calories": 185,
+      "protein": 25.5,
+      "carbs": 4.2,
+      "fat": 8.8,
+      "fiber": 0.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Low in carbs",
+        "Rich in omega-3",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Guava",
+      "calories": 68,
+      "protein": 2.6,
+      "carbs": 14.3,
+      "fat": 0.9,
+      "fiber": 5.4,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.0,
+      "category": "Fruits",
+      "health_benefits": [
+        "Very high in vitamin C",
+        "Rich in fiber",
+        "Good for immunity",
+        "Contains antioxidants"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Fish Tikka",
+      "calories": 178,
+      "protein": 26.2,
+      "carbs": 3.8,
+      "fat": 7.5,
+      "fiber": 0.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.6,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Low in carbs",
+        "Rich in vitamin D",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        },
+        {
+          "name": "dairy",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Indian Gooseberry (Amla)",
+      "calories": 58,
+      "protein": 0.9,
+      "carbs": 13.7,
+      "fat": 0.5,
+      "fiber": 4.3,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 2.8,
+      "category": "Fruits",
+      "health_benefits": [
+        "Extremely high in vitamin C",
+        "Strong antioxidant properties",
+        "Boosts immunity",
+        "Good for hair and skin"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Crab Xec Xec",
+      "calories": 195,
+      "protein": 23.5,
+      "carbs": 6.8,
+      "fat": 11.2,
+      "fiber": 2.1,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.4,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Rich in minerals",
+        "Contains healthy fats",
+        "Good source of zinc"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        },
+        {
+          "name": "coconut",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Star Fruit (Carambola)",
+      "calories": 31,
+      "protein": 1.0,
+      "carbs": 6.7,
+      "fat": 0.3,
+      "fiber": 2.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 3.6,
+      "category": "Fruits",
+      "health_benefits": [
+        "Low in calories",
+        "Good source of vitamin C",
+        "Contains antioxidants",
+        "Rich in fiber"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Prawn Balchao",
+      "calories": 165,
+      "protein": 19.8,
+      "carbs": 8.5,
+      "fat": 7.2,
+      "fiber": 1.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.2,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Contains selenium",
+        "Rich in vitamin B12",
+        "Good source of iron"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Wood Apple (Bael)",
+      "calories": 140,
+      "protein": 2.3,
+      "carbs": 31.8,
+      "fat": 0.3,
+      "fiber": 5.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.2,
+      "category": "Fruits",
+      "health_benefits": [
+        "Good for digestion",
+        "Rich in fiber",
+        "Contains vitamin C",
+        "Anti-inflammatory properties"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Malabar Matthi Curry",
+      "calories": 168,
+      "protein": 22.5,
+      "carbs": 5.8,
+      "fat": 8.2,
+      "fiber": 1.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.0,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "Rich in omega-3",
+        "High in protein",
+        "Contains vitamin D",
+        "Good source of calcium"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Indian Blackberry (Jamun)",
+      "calories": 60,
+      "protein": 0.7,
+      "carbs": 14.0,
+      "fat": 0.3,
+      "fiber": 0.9,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 3.8,
+      "category": "Fruits",
+      "health_benefits": [
+        "Rich in antioxidants",
+        "Good for diabetes",
+        "Improves digestion",
+        "Contains iron"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Squid Masala",
+      "calories": 145,
+      "protein": 20.5,
+      "carbs": 6.2,
+      "fat": 5.8,
+      "fiber": 0.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.6,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Low in fat",
+        "Rich in minerals",
+        "Contains copper"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Indian Plum (Ber)",
+      "calories": 55,
+      "protein": 0.8,
+      "carbs": 12.8,
+      "fat": 0.2,
+      "fiber": 0.9,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 3.5,
+      "category": "Fruits",
+      "health_benefits": [
+        "Rich in vitamin C",
+        "Contains antioxidants",
+        "Good for digestion",
+        "Source of minerals"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Karimeen Pollichathu",
+      "calories": 198,
+      "protein": 23.5,
+      "carbs": 7.8,
+      "fat": 9.5,
+      "fiber": 1.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.4,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Rich in omega-3",
+        "Contains vitamin D",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Soursop",
+      "calories": 66,
+      "protein": 1.0,
+      "carbs": 16.8,
+      "fat": 0.3,
+      "fiber": 3.3,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.0,
+      "category": "Fruits",
+      "health_benefits": [
+        "High in vitamin C",
+        "Contains antioxidants",
+        "Good for immune system",
+        "Anti-inflammatory properties"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Konkan Fish Curry",
+      "calories": 175,
+      "protein": 22.0,
+      "carbs": 6.5,
+      "fat": 8.5,
+      "fiber": 1.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.9,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "Rich in protein",
+        "Contains omega-3 fatty acids",
+        "Good source of vitamin D",
+        "High in minerals"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Passion Fruit",
+      "calories": 68,
+      "protein": 2.2,
+      "carbs": 16.1,
+      "fat": 0.7,
+      "fiber": 10.4,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 3.2,
+      "category": "Fruits",
+      "health_benefits": [
+        "High in fiber",
+        "Rich in antioxidants",
+        "Good source of vitamin A",
+        "Contains iron"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Prawn Ghee Roast",
+      "calories": 225,
+      "protein": 18.5,
+      "carbs": 5.2,
+      "fat": 15.8,
+      "fiber": 0.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Contains healthy fats",
+        "Rich in selenium",
+        "Good source of vitamin B12"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        },
+        {
+          "name": "dairy",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Rambutan",
+      "calories": 82,
+      "protein": 0.9,
+      "carbs": 20.9,
+      "fat": 0.3,
+      "fiber": 2.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.5,
+      "category": "Fruits",
+      "health_benefits": [
+        "Rich in vitamin C",
+        "Contains iron",
+        "Good for skin health",
+        "Supports immune system"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Mangalore Fish Curry",
+      "calories": 165,
+      "protein": 20.8,
+      "carbs": 7.2,
+      "fat": 7.5,
+      "fiber": 1.5,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.8,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Rich in omega-3",
+        "Contains vitamin D",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Kokum",
+      "calories": 41,
+      "protein": 0.8,
+      "carbs": 10.2,
+      "fat": 0.3,
+      "fiber": 3.1,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 2.8,
+      "category": "Fruits",
+      "health_benefits": [
+        "Natural digestive aid",
+        "Anti-inflammatory properties",
+        "Supports weight management",
+        "Rich in antioxidants"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Crab Curry (Bengali Style)",
+      "calories": 185,
+      "protein": 21.5,
+      "carbs": 8.2,
+      "fat": 9.8,
+      "fiber": 1.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.2,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Rich in zinc",
+        "Good source of selenium",
+        "Contains omega-3"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        },
+        {
+          "name": "mustard",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Longan",
+      "calories": 60,
+      "protein": 1.3,
+      "carbs": 15.1,
+      "fat": 0.1,
+      "fiber": 1.1,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.8,
+      "category": "Fruits",
+      "health_benefits": [
+        "Rich in vitamin C",
+        "Contains iron",
+        "Good for blood circulation",
+        "Supports brain health"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Squid Thoran",
+      "calories": 142,
+      "protein": 19.5,
+      "carbs": 7.8,
+      "fat": 4.8,
+      "fiber": 2.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Low in fat",
+        "Rich in minerals",
+        "Contains vitamin B12"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Rose Apple",
+      "calories": 25,
+      "protein": 0.6,
+      "carbs": 5.7,
+      "fat": 0.3,
+      "fiber": 1.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.2,
+      "category": "Fruits",
+      "health_benefits": [
+        "Low in calories",
+        "Good source of vitamin C",
+        "Contains antioxidants",
+        "Supports digestion"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Anchovy Fry",
+      "calories": 165,
+      "protein": 28.5,
+      "carbs": 4.2,
+      "fat": 5.8,
+      "fiber": 0.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.6,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "Very high in protein",
+        "Rich in calcium",
+        "Good source of iron",
+        "Contains omega-3"
+      ],
+      "allergens": [
+        {
+          "name": "fish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Tamarind",
+      "calories": 239,
+      "protein": 2.8,
+      "carbs": 62.5,
+      "fat": 0.6,
+      "fiber": 5.1,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 2.5,
+      "category": "Fruits",
+      "health_benefits": [
+        "Rich in antioxidants",
+        "Good source of fiber",
+        "Contains minerals",
+        "Aids digestion"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Mussels Sukka",
+      "calories": 172,
+      "protein": 24.5,
+      "carbs": 7.2,
+      "fat": 6.8,
+      "fiber": 0.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Rich in iron",
+        "Good source of omega-3",
+        "Contains vitamin B12"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Phalsa Berries",
+      "calories": 32,
+      "protein": 0.8,
+      "carbs": 7.5,
+      "fat": 0.2,
+      "fiber": 1.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 3.8,
+      "category": "Fruits",
+      "health_benefits": [
+        "Rich in antioxidants",
+        "Good for digestion",
+        "Contains vitamin C",
+        "Supports heart health"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Clam Sukka",
+      "calories": 155,
+      "protein": 22.8,
+      "carbs": 5.5,
+      "fat": 6.2,
+      "fiber": 0.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.9,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Rich in iron",
+        "Good source of zinc",
+        "Contains vitamin B12"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Karonda",
+      "calories": 45,
+      "protein": 1.1,
+      "carbs": 10.2,
+      "fat": 0.5,
+      "fiber": 2.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 3.2,
+      "category": "Fruits",
+      "health_benefits": [
+        "Rich in iron",
+        "Contains vitamin C",
+        "Good for digestion",
+        "Supports liver health"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Oyster Curry",
+      "calories": 162,
+      "protein": 21.2,
+      "carbs": 7.8,
+      "fat": 6.5,
+      "fiber": 0.0,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.7,
+      "category": "Indian Seafood",
+      "health_benefits": [
+        "High in protein",
+        "Rich in zinc",
+        "Good source of iron",
+        "Contains vitamin B12"
+      ],
+      "allergens": [
+        {
+          "name": "shellfish",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Shahi Tukda",
+      "calories": 385,
+      "protein": 7.5,
+      "carbs": 48.2,
+      "fat": 19.8,
+      "fiber": 1.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.5,
+      "category": "Indian Desserts",
+      "health_benefits": [
+        "Good source of calcium",
+        "Contains healthy fats",
+        "Provides quick energy",
+        "Rich in vitamin D"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        },
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "nuts",
+          "definite": true
+        }
+      ]
+    }
+  ]
+}

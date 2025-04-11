@@ -1,0 +1,10 @@
+{
+  "kulkarniaditya288@gmail.com": {
+    "email": "kulkarniaditya288@gmail.com",
+    "password": "$2b$12$ehWbKcuzWH8F6GN270IIvOfs4GJ/sI8nw.ORRDwX7JULzQzDECfoC"
+  },
+  "adityapuppey@gmail.com": {
+    "email": "adityapuppey@gmail.com",
+    "password": "pbkdf2:sha256:260000$HMsrMGQnRE8Aflpn$56d752cffdd7972324a3b7317145401b4bd41b0a89be9be0eadb0cbe70da6d2e"
+  }
+}

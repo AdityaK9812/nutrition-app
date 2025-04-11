@@ -1,0 +1,101 @@
+Starting generation...
+Generated 50 foods... (0.1% complete)
+Latest item: Bean
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 100 foods... (0.1% complete)
+Latest item: Asian with Avocado
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 150 foods... (0.1% complete)
+Latest item: Angus Cheese
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 200 foods... (0.2% complete)
+Latest item: Veggie with Caesar
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 250 foods... (0.2% complete)
+Latest item: Penne with Garlic and Oil
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 300 foods... (0.3% complete)
+Latest item: Chocolate with Nuts
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 350 foods... (0.4% complete)
+Latest item: Bacon
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 400 foods... (0.4% complete)
+Latest item: Pork with Noodles
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 450 foods... (0.4% complete)
+Latest item: Rigatoni Bolognese
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 500 foods... (0.5% complete)
+Latest item: Mushroom with Lettuce and Tomato
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 550 foods... (0.5% complete)
+Latest item: Bean Bowl
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 600 foods... (0.6% complete)
+Latest item: Mediterranean with Avocado
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 650 foods... (0.7% complete)
+Latest item: Pork with Pico de Gallo
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 700 foods... (0.7% complete)
+Latest item: Spicy Stir Fry
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 750 foods... (0.8% complete)
+Latest item: Shrimp Fajitas
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 800 foods... (0.8% complete)
+Latest item: Asian with Lettuce and Tomato
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 850 foods... (0.9% complete)
+Latest item: Lemon with Caramel Sauce
+Time elapsed: 0.0 seconds
+--------------------------------------------------
+Generated 900 foods... (0.9% complete)
+Latest item: Linguine Primavera
+Time elapsed: 0.1 seconds
+--------------------------------------------------
+Generated 950 foods... (0.9% complete)
+Latest item: Beef with Noodles
+Time elapsed: 0.1 seconds
+--------------------------------------------------
+Generated 1,000 foods... (1.0% complete)
+Latest item: Chicken Kung Pao
+Time elapsed: 0.1 seconds
+--------------------------------------------------
+Generated 1,050 foods... (1.1% complete)
+Latest item: Impossible with Caramelized Onions
+Time elapsed: 0.1 seconds
+--------------------------------------------------
+Generated 1,100 foods... (1.1% complete)
+Latest item: Pork with Rice and Beans
+Time elapsed: 0.1 seconds
+--------------------------------------------------
+Generated 1,150 foods... (1.1% complete)
+Latest item: Beef Chimichanga
+Time elapsed: 0.1 seconds
+--------------------------------------------------
+Generated 1,200 foods... (1.2% complete)
+Latest item: Pork in Garlic Sauce
+Time elapsed: 0.1 seconds
+--------------------------------------------------
+Generated 1,250 foods... (1.2% complete)
+Latest item: Fish with Avocado
+Time elapsed: 0.1 seconds
+--------------------------------------------------

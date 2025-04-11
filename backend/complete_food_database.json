@@ -1,0 +1,232 @@
+{
+  "foods": [
+    {
+      "name": "Masala Dosa",
+      "calories": 188,
+      "protein": 4.5,
+      "carbs": 35.7,
+      "fat": 3.2,
+      "fiber": 2.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Indian",
+      "health_benefits": [
+        "Good source of carbohydrates",
+        "Contains fermented ingredients",
+        "Rich in fiber",
+        "Low in fat"
+      ],
+      "allergens": [
+        {
+          "name": "rice",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Oolong Tea",
+      "calories": 1,
+      "protein": 0,
+      "carbs": 0.2,
+      "fat": 0,
+      "fiber": 0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 5.8,
+      "category": "Beverages",
+      "health_benefits": [
+        "Rich in antioxidants",
+        "Supports metabolism",
+        "Contains L-theanine",
+        "May aid digestion"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Earl Grey Tea",
+      "calories": 1,
+      "protein": 0,
+      "carbs": 0.3,
+      "fat": 0,
+      "fiber": 0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 4.8,
+      "category": "Beverages",
+      "health_benefits": [
+        "Contains bergamot oil",
+        "Rich in antioxidants",
+        "May reduce stress",
+        "Supports heart health"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Idli",
+      "calories": 146,
+      "protein": 6.2,
+      "carbs": 28.3,
+      "fat": 0.6,
+      "fiber": 2.4,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.0,
+      "category": "Indian",
+      "health_benefits": [
+        "Low in fat",
+        "Easy to digest",
+        "Good source of carbs",
+        "Contains probiotics"
+      ],
+      "allergens": [
+        {
+          "name": "rice",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Sambar",
+      "calories": 135,
+      "protein": 7.2,
+      "carbs": 20.8,
+      "fat": 3.5,
+      "fiber": 5.2,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 4.5,
+      "category": "Indian",
+      "health_benefits": [
+        "Rich in protein",
+        "High in fiber",
+        "Contains lentils",
+        "Good source of vitamins"
+      ],
+      "allergens": [
+        {
+          "name": "lentils",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Green Tea",
+      "calories": 1,
+      "protein": 0,
+      "carbs": 0.1,
+      "fat": 0,
+      "fiber": 0,
+      "serving_size": 100,
+      "serving_unit": "ml",
+      "acidity_level": 5.5,
+      "category": "Beverages",
+      "health_benefits": [
+        "High in antioxidants",
+        "Boosts metabolism",
+        "Improves brain function",
+        "Supports heart health"
+      ],
+      "allergens": []
+    },
+    {
+      "name": "Classic Hamburger",
+      "calories": 295,
+      "protein": 17.0,
+      "carbs": 24.8,
+      "fat": 14.2,
+      "fiber": 1.6,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.2,
+      "category": "Burgers",
+      "health_benefits": [
+        "Good source of protein",
+        "Contains iron",
+        "Provides vitamin B12",
+        "Source of zinc"
+      ],
+      "allergens": [
+        {
+          "name": "wheat",
+          "definite": true
+        },
+        {
+          "name": "soy",
+          "definite": false
+        },
+        {
+          "name": "milk",
+          "definite": false
+        }
+      ]
+    },
+    {
+      "name": "Butter Chicken",
+      "calories": 315,
+      "protein": 22.5,
+      "carbs": 6.8,
+      "fat": 22.3,
+      "fiber": 1.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.0,
+      "category": "Indian",
+      "health_benefits": [
+        "High in protein",
+        "Contains healthy fats",
+        "Rich in vitamins",
+        "Good source of minerals"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Palak Paneer",
+      "calories": 195,
+      "protein": 13.5,
+      "carbs": 8.2,
+      "fat": 12.8,
+      "fiber": 4.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 5.8,
+      "category": "Indian",
+      "health_benefits": [
+        "Rich in iron",
+        "Good source of calcium",
+        "High in fiber",
+        "Contains antioxidants"
+      ],
+      "allergens": [
+        {
+          "name": "milk",
+          "definite": true
+        }
+      ]
+    },
+    {
+      "name": "Chicken Biryani",
+      "calories": 292,
+      "protein": 18.2,
+      "carbs": 32.5,
+      "fat": 11.3,
+      "fiber": 2.8,
+      "serving_size": 100,
+      "serving_unit": "g",
+      "acidity_level": 6.2,
+      "category": "Indian",
+      "health_benefits": [
+        "Complete meal",
+        "Good source of protein",
+        "Contains essential spices",
+        "Rich in minerals"
+      ],
+      "allergens": []
+    }
+  ]
+} 
