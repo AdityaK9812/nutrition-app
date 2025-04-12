@@ -201,12 +201,23 @@ export default function Home() {
       const carbsPercentage = Math.round((data.carbs * 4 / totalCaloriesFromMacros) * 100);
       const fatPercentage = Math.round((data.fat * 9 / totalCaloriesFromMacros) * 100);
 
-      setNutritionData({
-        ...data,
+      // Create complete nutrition data object
+      const nutritionInfo: NutritionData = {
+        name: data.name,
+        calories: data.calories,
+        protein: data.protein,
+        carbs: data.carbs,
+        fat: data.fat,
+        fiber: data.fiber,
         proteinPercentage,
         carbsPercentage,
-        fatPercentage
-      });
+        fatPercentage,
+        acidity_level: data.acidity_level,
+        health_benefits: data.health_benefits || [],
+        allergens: data.allergens || []
+      };
+
+      setNutritionData(nutritionInfo);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {

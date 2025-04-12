@@ -5,9 +5,10 @@ from typing import Optional, List
 from pydantic import BaseModel
 import os
 import uvicorn
-import jwt
+from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
+import bcrypt
 
 # Load environment variables
 load_dotenv()
@@ -19,9 +20,26 @@ SECRET_KEY = os.getenv("JWT_SECRET", "your-secret-key")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-# Auth Configuration
-AUTH_EMAIL = os.getenv("AUTH_EMAIL")
-AUTH_PASSWORD = os.getenv("AUTH_PASSWORD")
+# User storage configuration
+USERS_FILE = os.path.join(os.path.dirname(__file__), 'users.json')
+
+def load_users():
+    try:
+        if os.path.exists(USERS_FILE):
+            with open(USERS_FILE, 'r') as f:
+                return json.load(f)
+        return {}
+    except Exception as e:
+        print(f"Error loading users: {str(e)}")
+        return {}
+
+def save_users(users):
+    try:
+        with open(USERS_FILE, 'w') as f:
+            json.dump(users, f, indent=2)
+    except Exception as e:
+        print(f"Error saving users: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to save user data")
 
 # Configure CORS
 app.add_middleware(
@@ -57,9 +75,7 @@ def verify_token(token: str):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         return payload
-    except jwt.ExpiredSignatureError:
-        raise HTTPException(status_code=401, detail="Token has expired")
-    except jwt.JWTError:
+    except JWTError:
         raise HTTPException(status_code=401, detail="Could not validate credentials")
 
 @app.post("/api/auth/login")
@@ -74,11 +90,19 @@ async def login(request: Request):
     if not email or not password:
         raise HTTPException(status_code=400, detail="Email and password are required")
 
-    if email != AUTH_EMAIL or password != AUTH_PASSWORD:
+    # Load users from file
+    users = load_users()
+    
+    # Check if user exists and verify password
+    if email not in users:
+        raise HTTPException(status_code=401, detail="Incorrect email or password")
+    
+    stored_password = users[email]['password']
+    if not bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
         raise HTTPException(status_code=401, detail="Incorrect email or password")
     
     access_token = create_access_token(data={"sub": email})
-    return {"token": access_token}
+    return {"token": access_token, "authenticated": True}
 
 @app.get("/api/auth/verify")
 async def verify(request: Request):

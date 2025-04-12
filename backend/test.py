@@ -36,36 +36,56 @@ CORS(app, resources={
 })
 
 # User storage in JSON file
-USERS_FILE = 'users.json'
+USERS_FILE = os.path.join(os.path.dirname(__file__), 'users.json')
+TOKENS_FILE = os.path.join(os.path.dirname(__file__), 'reset_tokens.json')
 
 # Add these configurations at the top with other configs
 app.config['SMTP_SERVER'] = 'smtp.gmail.com'
 app.config['SMTP_PORT'] = 587
 app.config['SMTP_USERNAME'] = 'kulkarniaditya288@gmail.com'
 app.config['SMTP_PASSWORD'] = 'kyjyxcuospanfmxw'  # Gmail App Password without spaces
-app.config['RESET_TOKENS'] = {}
 
 def load_users():
     try:
         if os.path.exists(USERS_FILE):
             with open(USERS_FILE, 'r') as f:
                 users_data = json.load(f)
-                print("Loaded users:", users_data)  # Debug print
+                # Verify all passwords are bcrypt hashed
+                for email, user_data in users_data.items():
+                    if not user_data['password'].startswith('$2b$'):
+                        # If not bcrypt hash, remove the user
+                        del users_data[email]
                 return users_data
-        print("Users file not found")  # Debug print
+        # Create new users file if it doesn't exist
+        with open(USERS_FILE, 'w') as f:
+            json.dump({}, f, indent=2)
         return {}
     except Exception as e:
-        print(f"Error loading users: {str(e)}")  # Debug print
+        print(f"Error loading users: {str(e)}")
+        # If there's any error, start fresh
+        try:
+            os.remove(USERS_FILE)
+            with open(USERS_FILE, 'w') as f:
+                json.dump({}, f, indent=2)
+        except:
+            pass
         return {}
 
 def save_users(users_data):
     try:
+        # Ensure we only save users with bcrypt hashed passwords
+        valid_users = {}
+        for email, user_data in users_data.items():
+            if user_data['password'].startswith('$2b$'):
+                valid_users[email] = user_data
+        
         with open(USERS_FILE, 'w') as f:
-            json.dump(users_data, f, indent=2)
+            json.dump(valid_users, f, indent=2)
     except Exception as e:
         print(f"Error saving users: {str(e)}")
+        raise
 
-# Initialize users from file
+# Initialize users
 users = load_users()
 
 # Load food database
@@ -116,85 +136,100 @@ def token_required(f):
         return f(current_user, *args, **kwargs)
     return decorated
 
-@app.route('/api/auth/signup', methods=['POST'])
+@app.route('/api/auth/signup', methods=['POST', 'OPTIONS'])
 def signup():
+    if request.method == 'OPTIONS':
+        response = jsonify({'status': 'OK'})
+        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        return response
+
     try:
         data = request.get_json()
-        
         if not data:
             return jsonify({'error': 'No data provided'}), 400
-            
+
         email = data.get('email')
         password = data.get('password')
 
         if not email or not password:
             return jsonify({'error': 'Email and password are required'}), 400
 
+        # Load current users
+        global users
+        users = load_users()
+
+        # Check if email already exists
         if email in users:
             return jsonify({'error': 'Email already registered'}), 400
 
-        hashed_password = generate_password_hash(password)
+        # Hash password
+        salt = bcrypt.gensalt()
+        hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+
+        # Store user
         users[email] = {
             'email': email,
-            'password': hashed_password
+            'password': hashed.decode('utf-8')
         }
-        
-        # Save users to file
+
+        # Save to file
         save_users(users)
 
         return jsonify({'message': 'User created successfully'}), 201
+
     except Exception as e:
         print(f"Signup error: {str(e)}")
         return jsonify({'error': 'An error occurred during signup'}), 500
 
-@app.route('/api/auth/login', methods=['POST'])
+@app.route('/api/auth/login', methods=['POST', 'OPTIONS'])
 def login():
+    if request.method == 'OPTIONS':
+        response = jsonify({'status': 'OK'})
+        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        return response
+
     try:
-        print("=== Login Request ===")
         data = request.get_json()
-        
         if not data:
             return jsonify({'error': 'No data provided'}), 400
-            
+
         email = data.get('email')
         password = data.get('password')
 
         if not email or not password:
             return jsonify({'error': 'Email and password are required'}), 400
 
-        # For testing purposes, accept these credentials
-        if email == "test@example.com" and password == "TestPass123!":
-            token = jwt.encode({
-                'email': email,
-                'exp': datetime.utcnow() + timedelta(days=1)
-            }, app.config['SECRET_KEY'], algorithm='HS256')
-
-            return jsonify({
-                'token': token,
-                'email': email,
-                'authenticated': True,
-                'message': 'Login successful'
-            }), 200
-
-        # For other users, check against the users database
+        # Load users
         global users
         users = load_users()
-        user = users.get(email)
-        
-        if not user or not check_password_hash(user['password'], password):
-            return jsonify({'error': 'Invalid email or password'}), 401
 
-        token = jwt.encode({
-            'email': email,
-            'exp': datetime.utcnow() + timedelta(days=1)
-        }, app.config['SECRET_KEY'], algorithm='HS256')
+        # Check if user exists
+        if email not in users:
+            return jsonify({'error': 'Incorrect email or password'}), 401
 
-        return jsonify({
-            'token': token,
-            'email': email,
-            'authenticated': True,
-            'message': 'Login successful'
-        }), 200
+        # Verify password
+        stored_password = users[email]['password'].encode('utf-8')
+        if bcrypt.checkpw(password.encode('utf-8'), stored_password):
+            # Generate token
+            token = jwt.encode(
+                {'email': email, 'exp': datetime.utcnow() + timedelta(hours=1)},
+                app.config['SECRET_KEY'],
+                algorithm='HS256'
+            )
+
+            response = jsonify({
+                'token': token,
+                'authenticated': True,
+                'email': email
+            })
+            response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+            return response, 200
+        else:
+            return jsonify({'error': 'Incorrect email or password'}), 401
 
     except Exception as e:
         print(f"Login error: {str(e)}")
@@ -402,6 +437,49 @@ def verify_token():
             'authenticated': False
         }), 500
 
+def load_reset_tokens():
+    try:
+        if os.path.exists(TOKENS_FILE):
+            with open(TOKENS_FILE, 'r') as f:
+                tokens_data = json.load(f)
+                # Filter out expired tokens
+                current_time = datetime.utcnow()
+                valid_tokens = {}
+                for token, data in tokens_data.items():
+                    exp_time = datetime.fromisoformat(data['exp'])
+                    if exp_time > current_time:
+                        # Keep the expiration time as a string to avoid serialization issues
+                        valid_tokens[token] = {
+                            'email': data['email'],
+                            'exp': data['exp']
+                        }
+                return valid_tokens
+        return {}
+    except Exception as e:
+        print(f"Error loading tokens: {str(e)}")
+        return {}
+
+def save_reset_tokens(tokens_data):
+    try:
+        # Ensure all tokens have string dates before saving
+        serializable_tokens = {}
+        for token, data in tokens_data.items():
+            # Convert datetime to string if it's not already a string
+            exp = data['exp']
+            if isinstance(exp, datetime):
+                exp = exp.isoformat()
+            serializable_tokens[token] = {
+                'email': data['email'],
+                'exp': exp
+            }
+        with open(TOKENS_FILE, 'w') as f:
+            json.dump(serializable_tokens, f, indent=2)
+    except Exception as e:
+        print(f"Error saving tokens: {str(e)}")
+
+# Initialize tokens from file
+reset_tokens = load_reset_tokens()
+
 def send_reset_email(email, reset_token):
     try:
         msg = MIMEMultipart()
@@ -473,10 +551,14 @@ def forgot_password():
         print(f"Generated reset token for {email}")
         
         # Store the token with expiration time (24 hours)
-        app.config['RESET_TOKENS'][token] = {
+        global reset_tokens
+        reset_tokens = load_reset_tokens()
+        expiration_time = datetime.utcnow() + timedelta(days=1)
+        reset_tokens[token] = {
             'email': email,
-            'exp': datetime.utcnow() + timedelta(days=1)
+            'exp': expiration_time.isoformat()  # Store as string immediately
         }
+        save_reset_tokens(reset_tokens)
 
         try:
             # Create email message
@@ -570,16 +652,23 @@ def reset_password():
         if not all([token, email, password]):
             return jsonify({'error': 'Missing required fields'}), 400
 
-        # Verify token
-        token_data = app.config['RESET_TOKENS'].get(token)
+        # Load and verify token
+        global reset_tokens
+        reset_tokens = load_reset_tokens()
+        token_data = reset_tokens.get(token)
+
         if not token_data:
             return jsonify({'error': 'Invalid or expired reset token'}), 400
 
-        # Check if token is expired (24 hours)
-        if datetime.utcnow() > token_data['exp']:
-            # Remove expired token
-            app.config['RESET_TOKENS'].pop(token, None)
-            return jsonify({'error': 'Reset token has expired'}), 400
+        # Check if token is expired
+        try:
+            expiration_time = datetime.fromisoformat(token_data['exp'])
+            if expiration_time < datetime.utcnow():
+                reset_tokens.pop(token, None)
+                save_reset_tokens(reset_tokens)
+                return jsonify({'error': 'Reset token has expired'}), 400
+        except Exception as e:
+            return jsonify({'error': 'Invalid reset token format'}), 400
 
         # Verify email matches token
         if email != token_data['email']:
@@ -591,15 +680,17 @@ def reset_password():
         if email not in users:
             return jsonify({'error': 'User not found'}), 404
 
-        # Hash the new password
-        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-        users[email]['password'] = hashed_password.decode('utf-8')
+        # Hash new password
+        salt = bcrypt.gensalt()
+        hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+        users[email]['password'] = hashed.decode('utf-8')
 
         # Save updated users
         save_users(users)
 
         # Remove used token
-        app.config['RESET_TOKENS'].pop(token, None)
+        reset_tokens.pop(token, None)
+        save_reset_tokens(reset_tokens)
 
         return jsonify({'message': 'Password has been reset successfully'}), 200
 
