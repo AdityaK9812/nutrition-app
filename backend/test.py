@@ -1,28 +1,39 @@
+import sys
+import os
+import bcrypt
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import os
 import json
 from typing import Dict
 import jwt
-from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 from functools import wraps
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import secrets
-import bcrypt
+from dotenv import load_dotenv
 
-# Disable Flask's environment loading
-os.environ['FLASK_ENV'] = 'production'
-os.environ['FLASK_DEBUG'] = '0'
+# Load environment variables from .env file
+load_dotenv()
+
+# Server Configuration
+PORT = os.getenv('PORT', '5000')
+ENV = os.getenv('ENV', 'production')
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+
+# JWT Configuration
+JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'default-development-key')
 
 app = Flask(__name__)
-# Use a fixed secret key
-app.config['SECRET_KEY'] = 'nutrismart-secret-key-123'
-# Disable Flask's .env loading
-app.config['ENV'] = 'production'
-app.config['DEBUG'] = False
+app.config.update({
+    'SECRET_KEY': JWT_SECRET_KEY,
+    'ENV': ENV,
+    'DEBUG': DEBUG,
+    'TESTING': False,
+    'PROPAGATE_EXCEPTIONS': True,
+    'PREFERRED_URL_SCHEME': 'http'
+})
 
 # Configure CORS
 CORS(app, resources={
@@ -39,48 +50,33 @@ CORS(app, resources={
 USERS_FILE = os.path.join(os.path.dirname(__file__), 'users.json')
 TOKENS_FILE = os.path.join(os.path.dirname(__file__), 'reset_tokens.json')
 
-# Add these configurations at the top with other configs
+# SMTP Configuration
 app.config['SMTP_SERVER'] = 'smtp.gmail.com'
 app.config['SMTP_PORT'] = 587
-app.config['SMTP_USERNAME'] = 'kulkarniaditya288@gmail.com'
-app.config['SMTP_PASSWORD'] = 'kyjyxcuospanfmxw'  # Gmail App Password without spaces
+app.config['SMTP_USERNAME'] = os.getenv('SMTP_USERNAME')
+app.config['SMTP_PASSWORD'] = os.getenv('SMTP_PASSWORD')
+
+# Print SMTP configuration for debugging (without showing the full password)
+smtp_user = app.config['SMTP_USERNAME']
+smtp_pass = app.config['SMTP_PASSWORD'][:4] + '****' if app.config['SMTP_PASSWORD'] else None
+print(f"SMTP Configuration loaded - Username: {smtp_user}, Password: {smtp_pass}")
 
 def load_users():
     try:
         if os.path.exists(USERS_FILE):
-            with open(USERS_FILE, 'r') as f:
+            with open(USERS_FILE, 'r', encoding='utf-8') as f:
                 users_data = json.load(f)
-                # Verify all passwords are bcrypt hashed
-                for email, user_data in users_data.items():
-                    if not user_data['password'].startswith('$2b$'):
-                        # If not bcrypt hash, remove the user
-                        del users_data[email]
+                print(f"Loaded users: {users_data}")  # Debug print
                 return users_data
-        # Create new users file if it doesn't exist
-        with open(USERS_FILE, 'w') as f:
-            json.dump({}, f, indent=2)
         return {}
     except Exception as e:
         print(f"Error loading users: {str(e)}")
-        # If there's any error, start fresh
-        try:
-            os.remove(USERS_FILE)
-            with open(USERS_FILE, 'w') as f:
-                json.dump({}, f, indent=2)
-        except:
-            pass
         return {}
 
 def save_users(users_data):
     try:
-        # Ensure we only save users with bcrypt hashed passwords
-        valid_users = {}
-        for email, user_data in users_data.items():
-            if user_data['password'].startswith('$2b$'):
-                valid_users[email] = user_data
-        
-        with open(USERS_FILE, 'w') as f:
-            json.dump(valid_users, f, indent=2)
+        with open(USERS_FILE, 'w', encoding='utf-8') as f:
+            json.dump(users_data, f, indent=2)
     except Exception as e:
         print(f"Error saving users: {str(e)}")
         raise
@@ -186,17 +182,14 @@ def signup():
 @app.route('/api/auth/login', methods=['POST', 'OPTIONS'])
 def login():
     if request.method == 'OPTIONS':
-        response = jsonify({'status': 'OK'})
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
-        response.headers.add('Access-Control-Allow-Methods', 'POST')
-        return response
+        return '', 200
 
     try:
         data = request.get_json()
+        
         if not data:
             return jsonify({'error': 'No data provided'}), 400
-
+            
         email = data.get('email')
         password = data.get('password')
 
@@ -204,33 +197,33 @@ def login():
             return jsonify({'error': 'Email and password are required'}), 400
 
         # Load users
-        global users
         users = load_users()
-
+        print(f"Attempting login for email: {email}")  # Debug print
+        
         # Check if user exists
         if email not in users:
-            return jsonify({'error': 'Incorrect email or password'}), 401
+            print(f"User not found: {email}")  # Debug print
+            return jsonify({'error': 'Invalid email or password'}), 401
 
-        # Verify password
-        stored_password = users[email]['password'].encode('utf-8')
-        if bcrypt.checkpw(password.encode('utf-8'), stored_password):
-            # Generate token
-            token = jwt.encode(
-                {'email': email, 'exp': datetime.utcnow() + timedelta(hours=1)},
-                app.config['SECRET_KEY'],
-                algorithm='HS256'
-            )
+        # Verify password using bcrypt
+        stored_password = users[email]['password']
+        if not bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
+            print("Password verification failed")  # Debug print
+            return jsonify({'error': 'Invalid email or password'}), 401
 
-            response = jsonify({
-                'token': token,
-                'authenticated': True,
-                'email': email
-            })
-            response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-            return response, 200
-        else:
-            return jsonify({'error': 'Incorrect email or password'}), 401
+        # Generate token
+        token = jwt.encode(
+            {'email': email, 'exp': datetime.utcnow() + timedelta(hours=1)},
+            app.config['SECRET_KEY'],
+            algorithm='HS256'
+        )
 
+        print(f"Login successful for {email}")  # Debug print
+        return jsonify({
+            'token': token,
+            'authenticated': True,
+            'email': email
+        }), 200
     except Exception as e:
         print(f"Login error: {str(e)}")
         return jsonify({'error': 'An error occurred during login'}), 500
@@ -485,31 +478,65 @@ def send_reset_email(email, reset_token):
         msg = MIMEMultipart()
         msg['From'] = app.config['SMTP_USERNAME']
         msg['To'] = email
-        msg['Subject'] = 'Password Reset Instructions'
+        msg['Subject'] = "Password Reset Request - NutriSmart"
 
+        # Create reset link
         reset_link = f"http://localhost:3000/reset-password?token={reset_token}&email={email}"
+
+        # Email body
         body = f"""
-        Hello,
-
-        You have requested to reset your password. Please click the link below to reset your password:
-
-        {reset_link}
-
-        If you did not request this, please ignore this email.
-
-        This link will expire in 1 hour.
-
-        Best regards,
-        NutriSmart Team
+        <html>
+            <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <div style="background-color: #F4FFF4; padding: 20px; border-radius: 10px;">
+                    <h2 style="color: #0B4A0B;">Password Reset Request</h2>
+                    <p>Hello,</p>
+                    <p>We received a request to reset your password for your NutriSmart account.</p>
+                    <p>Click the button below to reset your password:</p>
+                    <div style="text-align: center; margin: 30px 0;">
+                        <a href="{reset_link}" style="background-color: #0B4A0B; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">
+                            Reset Password
+                        </a>
+                    </div>
+                    <p>This link will expire in 24 hours.</p>
+                    <p>If you did not request this password reset, please ignore this email.</p>
+                    <p style="margin-top: 30px; color: #666; font-size: 12px;">
+                        Best regards,<br>
+                        The NutriSmart Team
+                    </p>
+                </div>
+            </body>
+        </html>
         """
-        msg.attach(MIMEText(body, 'plain'))
+        msg.attach(MIMEText(body, 'html'))
 
-        server = smtplib.SMTP(app.config['SMTP_SERVER'], app.config['SMTP_PORT'])
-        server.starttls()
-        server.login(app.config['SMTP_USERNAME'], app.config['SMTP_PASSWORD'])
-        server.send_message(msg)
-        server.quit()
-        return True
+        # Connect to SMTP server with proper error handling
+        try:
+            print("Connecting to SMTP server...")
+            server = smtplib.SMTP(app.config['SMTP_SERVER'], app.config['SMTP_PORT'])
+            server.set_debuglevel(1)  # Enable debug output
+            print("Starting TLS...")
+            server.starttls()
+            
+            # Get credentials from environment
+            username = app.config['SMTP_USERNAME']
+            password = app.config['SMTP_PASSWORD']
+            
+            print(f"Attempting login with username: {username}")
+            server.login(username, password)
+            print("Login successful, sending email...")
+            
+            server.send_message(msg)
+            print("Email sent successfully!")
+            server.quit()
+            return True
+                
+        except smtplib.SMTPAuthenticationError as auth_error:
+            print(f"SMTP Authentication Error: {str(auth_error)}")
+            return False
+        except Exception as smtp_error:
+            print(f"SMTP Error: {str(smtp_error)}")
+            return False
+            
     except Exception as e:
         print(f"Error sending email: {str(e)}")
         return False
@@ -517,38 +544,30 @@ def send_reset_email(email, reset_token):
 @app.route('/api/auth/forgot-password', methods=['POST', 'OPTIONS'])
 def forgot_password():
     if request.method == 'OPTIONS':
-        response = jsonify({'status': 'OK'})
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
-        response.headers.add('Access-Control-Allow-Methods', 'POST')
-        return response
+        return '', 200
 
     try:
         data = request.get_json()
-        print(f"Received forgot password request for email: {data.get('email') if data else None}")
-        
         if not data:
             return jsonify({'error': 'No data provided'}), 400
             
         email = data.get('email')
-
         if not email:
             return jsonify({'error': 'Email is required'}), 400
 
         # Load users to check if email exists
-        global users
         users = load_users()
-        print(f"Current users in database: {users}")
+        print(f"Checking reset password for email: {email}")  # Debug print
         
         if email not in users:
-            print(f"Email {email} not found in users database")
+            print(f"User not found for reset password: {email}")  # Debug print
+            # Don't reveal if email exists or not
             return jsonify({
                 'message': 'If an account exists with this email, you will receive password reset instructions.'
             }), 200
 
         # Generate a secure token
         token = secrets.token_urlsafe(32)
-        print(f"Generated reset token for {email}")
         
         # Store the token with expiration time (24 hours)
         global reset_tokens
@@ -556,89 +575,30 @@ def forgot_password():
         expiration_time = datetime.utcnow() + timedelta(days=1)
         reset_tokens[token] = {
             'email': email,
-            'exp': expiration_time.isoformat()  # Store as string immediately
+            'exp': expiration_time.isoformat()
         }
         save_reset_tokens(reset_tokens)
 
-        try:
-            # Create email message
-            msg = MIMEMultipart()
-            msg['From'] = app.config['SMTP_USERNAME']
-            msg['To'] = email
-            msg['Subject'] = "Password Reset Request - NutriSmart"
-
-            # Create reset link
-            reset_link = f"http://localhost:3000/reset-password?token={token}&email={email}"
-
-            # Email body
-            body = f"""
-            <html>
-                <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                    <div style="background-color: #F4FFF4; padding: 20px; border-radius: 10px;">
-                        <h2 style="color: #0B4A0B;">Password Reset Request</h2>
-                        <p>Hello,</p>
-                        <p>We received a request to reset your password for your NutriSmart account.</p>
-                        <p>Click the button below to reset your password:</p>
-                        <div style="text-align: center; margin: 30px 0;">
-                            <a href="{reset_link}" style="background-color: #0B4A0B; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">
-                                Reset Password
-                            </a>
-                        </div>
-                        <p>This link will expire in 24 hours.</p>
-                        <p>If you did not request this password reset, please ignore this email.</p>
-                        <p style="margin-top: 30px; color: #666; font-size: 12px;">
-                            Best regards,<br>
-                            The NutriSmart Team
-                        </p>
-                    </div>
-                </body>
-            </html>
-            """
-            msg.attach(MIMEText(body, 'html'))
-
-            # Connect to SMTP server
-            print("Connecting to SMTP server...")
-            server = smtplib.SMTP(app.config['SMTP_SERVER'], app.config['SMTP_PORT'])
-            server.set_debuglevel(1)
-            
-            print("Starting TLS...")
-            server.starttls()
-            
-            print("Logging in...")
-            server.login(app.config['SMTP_USERNAME'], app.config['SMTP_PASSWORD'])
-            
-            print("Sending email...")
-            server.send_message(msg)
-            
-            server.quit()
-            print("Email sent successfully!")
-
-            response = jsonify({
+        # Send reset email
+        email_sent = send_reset_email(email, token)
+        print(f"Reset email sent status: {email_sent}")  # Debug print
+        
+        if email_sent:
+            return jsonify({
                 'message': 'If an account exists with this email, you will receive password reset instructions.'
-            })
-            response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-            return response, 200
-
-        except Exception as e:
-            print(f"Email sending error: {str(e)}")
-            response = jsonify({'error': f'Failed to send reset email: {str(e)}'})
-            response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-            return response, 500
+            }), 200
+        else:
+            print("Failed to send reset email")  # Debug print
+            return jsonify({'error': 'Failed to send reset email. Please try again later.'}), 500
 
     except Exception as e:
-        print(f"General error: {str(e)}")
-        response = jsonify({'error': 'An unexpected error occurred'})
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-        return response, 500
+        print(f"Forgot password error: {str(e)}")
+        return jsonify({'error': 'An error occurred while processing your request'}), 500
 
 @app.route('/api/auth/reset-password', methods=['POST', 'OPTIONS'])
 def reset_password():
     if request.method == 'OPTIONS':
-        response = jsonify({'status': 'OK'})
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
-        response.headers.add('Access-Control-Allow-Methods', 'POST')
-        return response
+        return '', 200
 
     try:
         data = request.get_json()
@@ -647,9 +607,11 @@ def reset_password():
 
         token = data.get('token')
         email = data.get('email')
-        password = data.get('password')
+        new_password = data.get('password')
 
-        if not all([token, email, password]):
+        print(f"Attempting password reset for email: {email}")  # Debug print
+
+        if not all([token, email, new_password]):
             return jsonify({'error': 'Missing required fields'}), 400
 
         # Load and verify token
@@ -658,6 +620,7 @@ def reset_password():
         token_data = reset_tokens.get(token)
 
         if not token_data:
+            print("Invalid or expired reset token")  # Debug print
             return jsonify({'error': 'Invalid or expired reset token'}), 400
 
         # Check if token is expired
@@ -666,23 +629,26 @@ def reset_password():
             if expiration_time < datetime.utcnow():
                 reset_tokens.pop(token, None)
                 save_reset_tokens(reset_tokens)
+                print("Reset token has expired")  # Debug print
                 return jsonify({'error': 'Reset token has expired'}), 400
         except Exception as e:
+            print(f"Token expiration check error: {str(e)}")  # Debug print
             return jsonify({'error': 'Invalid reset token format'}), 400
 
         # Verify email matches token
         if email != token_data['email']:
+            print("Email mismatch with token")  # Debug print
             return jsonify({'error': 'Invalid reset token'}), 400
 
         # Update password
-        global users
         users = load_users()
         if email not in users:
+            print(f"User not found during reset: {email}")  # Debug print
             return jsonify({'error': 'User not found'}), 404
 
-        # Hash new password
+        # Hash new password with bcrypt
         salt = bcrypt.gensalt()
-        hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+        hashed = bcrypt.hashpw(new_password.encode('utf-8'), salt)
         users[email]['password'] = hashed.decode('utf-8')
 
         # Save updated users
@@ -692,6 +658,7 @@ def reset_password():
         reset_tokens.pop(token, None)
         save_reset_tokens(reset_tokens)
 
+        print(f"Password reset successful for {email}")  # Debug print
         return jsonify({'message': 'Password has been reset successfully'}), 200
 
     except Exception as e:
