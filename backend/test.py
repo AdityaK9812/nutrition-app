@@ -40,7 +40,10 @@ CORS(app, resources={
             "http://localhost:3000",
             "https://nutrition-app-beta.vercel.app",
             "https://nutrition-app-main.vercel.app",
-            "https://nutrition-40sdsbph0-adityas-projects-4e6166af.vercel.app"
+            "https://nutrition-40sdsbph0-adityas-projects-4e6166af.vercel.app",
+            "https://nutrition-n935sca5q-adityas-projects-4e6166af.vercel.app",
+            # Allow all Vercel preview deployments
+            r"^https://nutrition-.*\.vercel\.app$"
         ],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization", "Accept"],
@@ -55,11 +58,27 @@ CORS(app, resources={
 def handle_preflight():
     if request.method == "OPTIONS":
         response = app.make_default_options_response()
-        response.headers["Access-Control-Allow-Origin"] = request.headers.get("Origin", "*")
-        response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
-        response.headers["Access-Control-Max-Age"] = "3600"
-        response.headers["Access-Control-Allow-Credentials"] = "true"
+        # Get the Origin header from the request
+        origin = request.headers.get('Origin', '')
+        # Check if the origin matches any of our allowed patterns
+        allowed_origins = app.config['CORS_ORIGINS'] if 'CORS_ORIGINS' in app.config else [
+            "http://localhost:3000",
+            "https://nutrition-app-beta.vercel.app",
+            "https://nutrition-app-main.vercel.app",
+            "https://nutrition-40sdsbph0-adityas-projects-4e6166af.vercel.app",
+            "https://nutrition-n935sca5q-adityas-projects-4e6166af.vercel.app"
+        ]
+        
+        # Also allow any Vercel preview deployments
+        if origin.startswith('https://nutrition-') and origin.endswith('.vercel.app'):
+            allowed_origins.append(origin)
+            
+        if origin in allowed_origins:
+            response.headers["Access-Control-Allow-Origin"] = origin
+            response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+            response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
+            response.headers["Access-Control-Max-Age"] = "3600"
+            response.headers["Access-Control-Allow-Credentials"] = "true"
         return response
 
 # User storage (for testing purposes)
@@ -147,17 +166,38 @@ def send_reset_email(email: str, reset_token: str) -> bool:
 
         print(f"Preparing to send email to: {email}")
         
-        msg = MIMEMultipart()
+        msg = MIMEMultipart('alternative')
         msg['From'] = f"NutriSmart <{SMTP_USERNAME}>"
         msg['To'] = email
         msg['Subject'] = "Password Reset Request - NutriSmart"
 
         # Create reset link with token
-        frontend_url = os.getenv("FRONTEND_URL", "https://nutrition-app-main.vercel.app")
-        reset_link = f"{frontend_url}/reset-password?token={reset_token}"
+        frontend_url = os.getenv("FRONTEND_URL", "https://nutrition-n935sca5q-adityas-projects-4e6166af.vercel.app")
+        reset_link = f"{frontend_url}/reset-password?token={reset_token}&email={email}"
         
-        # Email body
-        body = f"""
+        print(f"Reset link generated: {reset_link}")
+
+        # Plain text version
+        text = f"""
+        Password Reset Request
+
+        Hello,
+
+        We received a request to reset your password for your NutriSmart account.
+        Click the link below to reset your password:
+
+        {reset_link}
+
+        This link will expire in 24 hours.
+
+        If you did not request this password reset, please ignore this email.
+
+        Best regards,
+        The NutriSmart Team
+        """
+
+        # HTML version
+        html = f"""
         <html>
             <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
                 <div style="background-color: #F4FFF4; padding: 20px; border-radius: 10px;">
@@ -183,34 +223,23 @@ def send_reset_email(email: str, reset_token: str) -> bool:
         </html>
         """
 
-        msg.attach(MIMEText(body, 'html'))
+        # Attach both plain text and HTML versions
+        msg.attach(MIMEText(text, 'plain'))
+        msg.attach(MIMEText(html, 'html'))
 
-        # Send email
         print("Connecting to SMTP server...")
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
             server.set_debuglevel(1)  # Enable debug output
-            print("Starting TLS...")
             server.starttls()
-            print("Logging in to SMTP server...")
+            print("Connected to SMTP server, attempting login...")
             server.login(SMTP_USERNAME, SMTP_PASSWORD)
-            print("Sending email...")
+            print("Logged in successfully, sending email...")
             server.send_message(msg)
             print("Email sent successfully!")
-            print("=== Email Send Process Complete ===\n")
             return True
-        
-    except smtplib.SMTPAuthenticationError as e:
-        print(f"\nSMTP Authentication Error: {str(e)}")
-        print("Please check your SMTP credentials")
-        return False
-    except smtplib.SMTPException as e:
-        print(f"\nSMTP Error: {str(e)}")
-        return False
+
     except Exception as e:
-        print(f"\nUnexpected error sending reset email: {str(e)}")
-        print(f"Error type: {type(e)}")
-        import traceback
-        traceback.print_exc()
+        print(f"Error sending email: {str(e)}")
         return False
 
 @app.route("/api/auth/signup", methods=["POST", "OPTIONS"])
