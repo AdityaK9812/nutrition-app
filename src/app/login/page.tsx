@@ -4,9 +4,13 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-interface ApiError {
-  message: string;
+interface ApiError extends Error {
   status?: number;
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
 }
 
 export default function Login() {
@@ -14,7 +18,7 @@ export default function Login() {
   const [mounted, setMounted] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<ApiError | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -36,31 +40,26 @@ export default function Login() {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ email, password })
       });
 
       const data = await response.json();
-      console.log('Login response:', data);
 
       if (!response.ok) {
         throw new Error(data.error || 'Login failed');
       }
 
       if (data.token) {
-        console.log('Login successful, storing token...');
         sessionStorage.setItem('authToken', data.token);
         sessionStorage.setItem('userEmail', email);
-        console.log('Token stored, redirecting...');
         router.push('/');
-      } else {
-        throw new Error('No token received');
       }
-    } catch (err: any) {
-      console.error('Login error:', err);
-      setError({ message: err.message || 'Cannot connect to server. Please try again later.' });
+    } catch (err) {
+      const error = err as Error;
+      console.error('Login error:', error);
+      setError(error.message || 'An unexpected error occurred. Please try again.');
       sessionStorage.removeItem('authToken');
       sessionStorage.removeItem('userEmail');
     } finally {
@@ -113,7 +112,7 @@ export default function Login() {
 
           {error && (
             <div className="text-red-500 text-sm bg-red-50 p-3 rounded-md">
-              {error.message}
+              {error}
             </div>
           )}
 

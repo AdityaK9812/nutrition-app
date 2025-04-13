@@ -4,9 +4,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-interface ApiError {
-  message: string;
+interface ApiError extends Error {
   status?: number;
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
 }
 
 export default function Signup() {
@@ -17,7 +21,7 @@ export default function Signup() {
     confirmPassword: ''
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<ApiError | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +29,7 @@ export default function Signup() {
     setLoading(true);
 
     if (formData.password !== formData.confirmPassword) {
-      setError({ message: 'Passwords do not match' });
+      setError('Passwords do not match');
       setLoading(false);
       return;
     }
@@ -57,7 +61,7 @@ export default function Signup() {
       const loginData = await loginResponse.json();
 
       if (!loginResponse.ok) {
-        throw new Error(loginData.error || 'Failed to log in');
+        throw new Error(loginData.error || 'Account created but login failed');
       }
 
       if (loginData.token) {
@@ -65,8 +69,9 @@ export default function Signup() {
         sessionStorage.setItem('userEmail', formData.email);
         router.push('/');
       }
-    } catch (err: any) {
-      setError({ message: err.message || 'Failed to create account. Please try again later.' });
+    } catch (err) {
+      const error = err as Error;
+      setError(error.message || 'An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -123,7 +128,7 @@ export default function Signup() {
 
           {error && (
             <div className="text-red-500 text-sm bg-red-50 p-3 rounded-md">
-              {error.message}
+              {error}
             </div>
           )}
 

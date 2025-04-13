@@ -3,15 +3,19 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-interface ApiError {
-  message: string;
+interface ApiError extends Error {
   status?: number;
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
 }
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [error, setError] = useState<ApiError | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,8 +40,9 @@ export default function ForgotPassword() {
       }
 
       setMessage('If an account exists with this email, you will receive password reset instructions.');
-    } catch (err: any) {
-      setError({ message: err.message || 'Failed to send reset email. Please try again later.' });
+    } catch (err) {
+      const error = err as Error;
+      setError(error.message || 'An unexpected error occurred. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +74,7 @@ export default function ForgotPassword() {
 
           {error && (
             <div className="text-red-500 text-sm bg-red-50 p-3 rounded-md">
-              {error.message}
+              {error}
             </div>
           )}
 
