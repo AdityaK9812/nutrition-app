@@ -56,8 +56,9 @@ export default function Login() {
       } else {
         throw new Error('No token received');
       }
-    } catch (err: any) {
-      setError(err.message || 'Cannot connect to server. Please try again later.');
+    } catch (err: Error | unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Cannot connect to server. Please try again later.';
+      setError(errorMessage);
       sessionStorage.removeItem('authToken');
       sessionStorage.removeItem('userEmail');
       setIsLoading(false);
