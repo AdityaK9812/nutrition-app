@@ -23,7 +23,7 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
+    setError('');
     setIsLoading(true);
 
     try {
@@ -31,35 +31,35 @@ export default function Login() {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({ email, password })
       });
 
-      console.log('Response status:', response.status);
       const data = await response.json();
-      console.log('Response data:', data);
 
       if (!response.ok) {
         throw new Error(data.error || 'Login failed');
       }
 
       if (data.token) {
-        console.log('Login successful, storing token...');
+        // Store the token and email in sessionStorage
         sessionStorage.setItem('authToken', data.token);
         sessionStorage.setItem('userEmail', email);
-        router.push('/');
+        
+        // Add a delay to ensure storage is set
+        setTimeout(() => {
+          // Use router.replace instead of push to prevent back navigation
+          router.replace('/');
+        }, 100);
+      } else {
+        throw new Error('No token received');
       }
-    } catch (err) {
-      const error = err as Error;
-      console.error('Login error details:', {
-        message: error.message,
-        stack: error.stack
-      });
-      setError(error.message || 'An unexpected error occurred. Please try again.');
+    } catch (err: any) {
+      setError(err.message || 'Cannot connect to server. Please try again later.');
       sessionStorage.removeItem('authToken');
       sessionStorage.removeItem('userEmail');
-    } finally {
       setIsLoading(false);
     }
   };

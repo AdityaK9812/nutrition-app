@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface FoodItem {
   name: string;
@@ -59,6 +60,7 @@ export default function Home() {
   const [nutritionData, setNutritionData] = useState<NutritionData | null>(null);
   const [suggestions, setSuggestions] = useState<FoodItem[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -68,14 +70,15 @@ export default function Home() {
     const checkAuth = async () => {
       const token = sessionStorage.getItem('authToken');
       if (!token) {
-        window.location.href = '/login';
+        router.replace('/login');
         return;
       }
 
       try {
-        const response = await fetch('http://localhost:5000/api/auth/verify', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/verify`, {
           headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
           }
         });
 
@@ -89,12 +92,14 @@ export default function Home() {
         console.error('Auth verification failed:', error);
         sessionStorage.removeItem('authToken');
         sessionStorage.removeItem('userEmail');
-        window.location.href = '/login';
+        router.replace('/login');
       }
     };
 
-    checkAuth();
-  }, []);
+    if (mounted) {
+      checkAuth();
+    }
+  }, [router, mounted]);
 
   useEffect(() => {
     if (isLiquidFood(foodQuery)) {
@@ -203,7 +208,7 @@ export default function Home() {
   const handleLogout = () => {
     sessionStorage.removeItem('authToken');
     sessionStorage.removeItem('userEmail');
-    window.location.href = '/login';
+    router.replace('/login');
   };
 
   if (!mounted) {
