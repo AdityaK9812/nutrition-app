@@ -290,7 +290,7 @@ export default function Home() {
                     onChange={handleQueryChange}
                     onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                     placeholder="Search for any food..."
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-lg"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-lg text-slate-900 dark:text-white bg-white/90 dark:bg-slate-800/90"
                     required
                   />
                   {suggestions.length > 0 && showSuggestions && (
@@ -311,33 +311,37 @@ export default function Home() {
                   )}
                 </div>
 
-                {/* Quantity and Unit Controls */}
-                <div className="flex gap-2">
-                  <input
-                    type="number"
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-lg"
-                    min="0"
-                    required
-                  />
-                  <select
-                    value={unit}
-                    onChange={(e) => setUnit(e.target.value)}
-                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white text-lg"
-                    required
-                  >
-                    <option value={isLiquidFood(foodQuery) ? 'ml' : 'g'}>
-                      {isLiquidFood(foodQuery) ? 'ml' : 'g'}
-                    </option>
-                    <option value="oz">oz</option>
-                  </select>
+                {/* Quantity and Unit Controls - Mobile Optimized */}
+                <div className="flex gap-2 flex-col sm:flex-row">
+                  <div className="flex-1">
+                    <input
+                      type="number"
+                      value={quantity}
+                      onChange={(e) => setQuantity(e.target.value)}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-lg text-slate-900 dark:text-white bg-white/90 dark:bg-slate-800/90"
+                      min="0"
+                      required
+                    />
+                  </div>
+                  <div className="w-full sm:w-24">
+                    <select
+                      value={unit}
+                      onChange={(e) => setUnit(e.target.value)}
+                      className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/90 dark:bg-slate-800/90 text-lg text-slate-900 dark:text-white"
+                      required
+                    >
+                      <option value={isLiquidFood(foodQuery) ? 'ml' : 'g'}>
+                        {isLiquidFood(foodQuery) ? 'ml' : 'g'}
+                      </option>
+                      <option value="oz">oz</option>
+                    </select>
+                  </div>
                 </div>
 
                 {/* Search Button */}
                 <button
                   type="submit"
-                  className="w-full md:w-auto px-6 py-3 bg-[#0B4A0B] text-white rounded-lg hover:bg-[#083708] focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors text-lg font-medium"
+                  className="w-full px-6 py-3 bg-[#0B4A0B] text-white rounded-lg hover:bg-[#083708] focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors text-lg font-medium shadow-md"
                   disabled={loading}
                 >
                   {loading ? 'Searching...' : 'Get Nutrition'}
