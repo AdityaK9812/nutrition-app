@@ -240,8 +240,23 @@ export default function Home() {
         />
       </div>
       
-      {/* Logout Button */}
-      <div className="absolute top-4 right-4 z-50">
+      {/* Mobile Navigation Bar */}
+      <div className="md:hidden fixed top-0 left-0 right-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md z-50 shadow-lg">
+        <div className="flex justify-between items-center px-4 py-3">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-amber-950 to-amber-700 bg-clip-text text-transparent">
+            NutriSmart
+          </h1>
+          <button
+            onClick={handleLogout}
+            className="px-3 py-1.5 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+
+      {/* Desktop Logout Button */}
+      <div className="hidden md:block absolute top-4 right-4 z-50">
         <button
           onClick={handleLogout}
           className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
@@ -251,11 +266,11 @@ export default function Home() {
       </div>
       
       {/* Content Container with backdrop blur */}
-      <div className="relative z-10">
+      <div className="relative z-10 pt-16 md:pt-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Enhanced Header with backdrop */}
-          <div className="text-center mb-12 animate-fade-in bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl p-8 shadow-xl">
-            <h1 className="text-5xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-amber-950 via-amber-800 to-amber-700 bg-clip-text text-transparent drop-shadow-[0_2px_2px_rgba(120,53,15,0.3)] tracking-tight font-serif">
+          <div className="text-center mb-8 md:mb-12 animate-fade-in bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl p-6 md:p-8 shadow-xl">
+            <h1 className="hidden md:block text-5xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-amber-950 via-amber-800 to-amber-700 bg-clip-text text-transparent drop-shadow-[0_2px_2px_rgba(120,53,15,0.3)] tracking-tight font-serif">
               NutriSmart
             </h1>
             <p className="text-lg md:text-xl font-medium tracking-wide bg-gradient-to-r from-slate-800 to-slate-600 dark:from-slate-200 dark:to-slate-300 bg-clip-text text-transparent transition-all duration-300 ease-in-out hover:tracking-wider font-sans">
@@ -265,21 +280,21 @@ export default function Home() {
 
           {/* Search Section */}
           <div className="space-y-4 sm:space-y-8">
-            <form onSubmit={handleSearch} className="search-container mx-2 sm:mx-0 p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex-1 min-w-0 relative">
+            <form onSubmit={handleSearch} className="search-container mx-0 sm:mx-0 p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg">
+              <div className="flex flex-col gap-4">
+                {/* Search Input */}
+                <div className="relative">
                   <input
                     type="text"
                     value={foodQuery}
                     onChange={handleQueryChange}
                     onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                     placeholder="Search for any food..."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-lg"
                     required
                   />
-                 
                   {suggestions.length > 0 && showSuggestions && (
-                    <div className="absolute left-0 right-0 mt-1 max-h-60 overflow-auto bg-white dark:bg-slate-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 z-50">
+                    <div className="absolute left-0 right-0 mt-1 max-h-60 overflow-auto bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
                       {suggestions.map((suggestion, index) => (
                         <div
                           key={index}
@@ -295,34 +310,38 @@ export default function Home() {
                     </div>
                   )}
                 </div>
-                <div className="flex items-center gap-2">
+
+                {/* Quantity and Unit Controls */}
+                <div className="flex gap-2">
                   <input
                     type="number"
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
-                    className="w-24 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-lg"
                     min="0"
                     required
                   />
                   <select
                     value={unit}
                     onChange={(e) => setUnit(e.target.value)}
-                    className="w-24 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-white"
+                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white text-lg"
                     required
                   >
                     <option value={isLiquidFood(foodQuery) ? 'ml' : 'g'}>
                       {isLiquidFood(foodQuery) ? 'ml' : 'g'}
                     </option>
-                    <option value="oz">ounces</option>
+                    <option value="oz">oz</option>
                   </select>
-                  <button
-                    type="submit"
-                    className="px-6 py-2 bg-[#0B4A0B] text-white rounded-md hover:bg-[#083708] focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors"
-                    disabled={loading}
-                  >
-                    {loading ? 'Searching...' : 'Get Nutrition'}
-                  </button>
                 </div>
+
+                {/* Search Button */}
+                <button
+                  type="submit"
+                  className="w-full md:w-auto px-6 py-3 bg-[#0B4A0B] text-white rounded-lg hover:bg-[#083708] focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors text-lg font-medium"
+                  disabled={loading}
+                >
+                  {loading ? 'Searching...' : 'Get Nutrition'}
+                </button>
               </div>
             </form>
 
