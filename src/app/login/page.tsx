@@ -27,7 +27,7 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      console.log('Attempting login...');
+      console.log('API URL:', process.env.NEXT_PUBLIC_API_URL);
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
@@ -36,20 +36,26 @@ export default function Login() {
         body: JSON.stringify({ email, password })
       });
 
+      console.log('Response status:', response.status);
       const data = await response.json();
+      console.log('Response data:', data);
 
       if (!response.ok) {
         throw new Error(data.error || 'Login failed');
       }
 
       if (data.token) {
+        console.log('Login successful, storing token...');
         sessionStorage.setItem('authToken', data.token);
         sessionStorage.setItem('userEmail', email);
         router.push('/');
       }
     } catch (err) {
       const error = err as Error;
-      console.error('Login error:', error);
+      console.error('Login error details:', {
+        message: error.message,
+        stack: error.stack
+      });
       setError(error.message || 'An unexpected error occurred. Please try again.');
       sessionStorage.removeItem('authToken');
       sessionStorage.removeItem('userEmail');
