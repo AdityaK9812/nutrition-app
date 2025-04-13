@@ -29,16 +29,29 @@ SMTP_USERNAME = os.getenv("SMTP_USERNAME")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 
 # Print SMTP configuration for debugging (without showing the full password)
-smtp_user = SMTP_USERNAME
-smtp_pass = SMTP_PASSWORD[:4] + '****' if SMTP_PASSWORD else None
-print(f"SMTP Configuration loaded - Username: {smtp_user}, Password: {smtp_pass}")
+print("\n=== SMTP Configuration ===")
+print(f"SMTP_SERVER: {SMTP_SERVER}")
+print(f"SMTP_PORT: {SMTP_PORT}")
+print(f"SMTP_USERNAME: {SMTP_USERNAME}")
+print(f"SMTP_PASSWORD present: {'Yes' if SMTP_PASSWORD else 'No'}")
+print(f"SMTP_PASSWORD length: {len(SMTP_PASSWORD) if SMTP_PASSWORD else 0}")
+print("========================\n")
+
+if not SMTP_USERNAME or not SMTP_PASSWORD:
+    print("WARNING: SMTP credentials are not properly configured!")
+    print("Please check your environment variables:")
+    print("1. SMTP_USERNAME should be your Gmail address")
+    print("2. SMTP_PASSWORD should be your Gmail app password")
+    print("These can be set in your .env file or in your deployment environment variables.")
 
 # Configure CORS for specific origins
 CORS(app, resources={
     r"/api/*": {
         "origins": [
             "http://localhost:3000",
-            "https://nutrition-app-beta.vercel.app"
+            "https://nutrition-app-beta.vercel.app",
+            "https://nutrition-r3v8rjfk6-adityas-projects-4e6166af.vercel.app",
+            "https://*.vercel.app"  # Allow all Vercel preview deployments
         ],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization", "Accept"],
@@ -56,9 +69,19 @@ def handle_preflight():
         origin = request.headers.get('Origin', '')
         allowed_origins = [
             "http://localhost:3000",
-            "https://nutrition-app-beta.vercel.app"
+            "https://nutrition-app-beta.vercel.app",
+            "https://nutrition-r3v8rjfk6-adityas-projects-4e6166af.vercel.app",
+            "https://*.vercel.app"  # Allow all Vercel preview deployments
         ]
-        if origin in allowed_origins:
+        
+        # Check if the origin matches any of our allowed patterns
+        is_allowed = False
+        for allowed_origin in allowed_origins:
+            if allowed_origin == origin or (allowed_origin.endswith('.vercel.app') and origin.endswith('.vercel.app')):
+                is_allowed = True
+                break
+                
+        if is_allowed:
             response.headers.update({
                 "Access-Control-Allow-Origin": origin,
                 "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
@@ -74,9 +97,19 @@ def after_request(response):
     origin = request.headers.get('Origin', '')
     allowed_origins = [
         "http://localhost:3000",
-        "https://nutrition-app-beta.vercel.app"
+        "https://nutrition-app-beta.vercel.app",
+        "https://nutrition-r3v8rjfk6-adityas-projects-4e6166af.vercel.app",
+        "https://*.vercel.app"  # Allow all Vercel preview deployments
     ]
-    if origin in allowed_origins:
+    
+    # Check if the origin matches any of our allowed patterns
+    is_allowed = False
+    for allowed_origin in allowed_origins:
+        if allowed_origin == origin or (allowed_origin.endswith('.vercel.app') and origin.endswith('.vercel.app')):
+            is_allowed = True
+            break
+            
+    if is_allowed:
         response.headers.update({
             "Access-Control-Allow-Origin": origin,
             "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
@@ -240,22 +273,29 @@ def send_reset_email(email: str, reset_token: str) -> bool:
             print("Starting TLS...")
             server.starttls()
             print(f"Connected to SMTP server {SMTP_SERVER}:{SMTP_PORT}, attempting login with username: {SMTP_USERNAME}")
-            server.login(SMTP_USERNAME, SMTP_PASSWORD)
-            print("SMTP Login successful!")
-            print("Sending email message...")
-            server.send_message(msg)
-            print("Email sent successfully!")
-            print("=== Email Send Process Complete ===\n")
-            return True
+            try:
+                server.login(SMTP_USERNAME, SMTP_PASSWORD)
+                print("SMTP Login successful!")
+                print("Sending email message...")
+                server.send_message(msg)
+                print("Email sent successfully!")
+                print("=== Email Send Process Complete ===\n")
+                return True
+            except smtplib.SMTPAuthenticationError as e:
+                print(f"SMTP Authentication Error: {str(e)}")
+                print("Please check your SMTP credentials (username and password)")
+                return False
+            except smtplib.SMTPException as e:
+                print(f"SMTP Error: {str(e)}")
+                print(f"Error type: {type(e)}")
+                return False
+            except Exception as e:
+                print(f"Unexpected error during SMTP operation: {str(e)}")
+                print(f"Error type: {type(e)}")
+                import traceback
+                traceback.print_exc()
+                return False
 
-    except smtplib.SMTPAuthenticationError as e:
-        print(f"SMTP Authentication Error: {str(e)}")
-        print("Please check your SMTP credentials (username and password)")
-        return False
-    except smtplib.SMTPException as e:
-        print(f"SMTP Error: {str(e)}")
-        print(f"Error type: {type(e)}")
-        return False
     except Exception as e:
         print(f"Unexpected error sending reset email: {str(e)}")
         print(f"Error type: {type(e)}")
@@ -508,7 +548,9 @@ def forgot_password():
         origin = request.headers.get('Origin', '')
         allowed_origins = [
             "http://localhost:3000",
-            "https://nutrition-app-beta.vercel.app"
+            "https://nutrition-app-beta.vercel.app",
+            "https://nutrition-r3v8rjfk6-adityas-projects-4e6166af.vercel.app",
+            "https://*.vercel.app"  # Allow all Vercel preview deployments
         ]
         if origin in allowed_origins:
             response.headers.update({
@@ -522,6 +564,9 @@ def forgot_password():
 
     try:
         print("\n=== Starting Forgot Password Process ===")
+        print(f"Request headers: {dict(request.headers)}")
+        print(f"Request data: {request.get_data()}")
+        
         data = request.get_json()
         if not data:
             print("No data provided in request")
@@ -565,6 +610,7 @@ def forgot_password():
 
         # Send reset email
         print("Attempting to send reset email...")
+        print(f"SMTP Configuration - Username: {SMTP_USERNAME}, Server: {SMTP_SERVER}, Port: {SMTP_PORT}")
         email_sent = send_reset_email(email, token)
         print(f"Reset email sent status: {email_sent}")
 
