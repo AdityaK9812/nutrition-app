@@ -39,14 +39,28 @@ CORS(app, resources={
         "origins": [
             "http://localhost:3000",
             "https://nutrition-app-beta.vercel.app",
-            "https://nutrition-app-main.vercel.app"
+            "https://nutrition-app-main.vercel.app",
+            "https://nutrition-40sdsbph0-adityas-projects-4e6166af.vercel.app"
         ],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization", "Accept"],
         "supports_credentials": True,
-        "max_age": 3600
+        "max_age": 3600,
+        "expose_headers": ["Content-Type", "Authorization"]
     }
 })
+
+# Global OPTIONS handler for CORS preflight requests
+@app.before_request
+def handle_preflight():
+    if request.method == "OPTIONS":
+        response = app.make_default_options_response()
+        response.headers["Access-Control-Allow-Origin"] = request.headers.get("Origin", "*")
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
+        response.headers["Access-Control-Max-Age"] = "3600"
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        return response
 
 # User storage (for testing purposes)
 USERS = {}
