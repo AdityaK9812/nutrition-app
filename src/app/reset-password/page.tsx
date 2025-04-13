@@ -10,10 +10,11 @@ function ResetPasswordForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const token = searchParams.get('token');
+  const email = searchParams.get('email');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,37 +27,51 @@ function ResetPasswordForm() {
       return;
     }
 
+    if (!email || !token) {
+      setError('Missing email or token. Please request a new password reset.');
+      setIsLoading(false);
+      return;
+    }
+
     try {
+      console.log('Sending reset password request:', { token, email, password });
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/reset-password`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify({ token, password })
+        body: JSON.stringify({
+          token,
+          email,
+          password
+        }),
       });
 
       const data = await response.json();
+      console.log('Reset password response:', data);
 
       if (!response.ok) {
+        console.error('Reset password failed:', data);
         throw new Error(data.error || 'Failed to reset password');
       }
 
-      setSuccess(true);
+      setSuccess('Password has been reset successfully. Redirecting to login...');
       setTimeout(() => {
         router.push('/login');
-      }, 3000);
+      }, 2000);
     } catch (err) {
-      const error = err as Error;
-      setError(error.message || 'An unexpected error occurred. Please try again.');
+      console.error('Reset password error details:', err);
+      setError(err instanceof Error ? err.message : 'Failed to reset password');
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (!token) {
+  if (!token || !email) {
     return (
       <div className="text-center text-red-500">
-        Invalid or missing reset token. Please request a new password reset.
+        Invalid or missing reset token or email. Please request a new password reset.
         <div className="mt-4">
           <Link href="/forgot-password" className="text-[#8B4513] hover:text-[#5C2D0C]">
             Go to Forgot Password
@@ -102,7 +117,7 @@ function ResetPasswordForm() {
 
       {success && (
         <div className="text-green-500 text-sm bg-green-50 p-3 rounded-md">
-          Password reset successful! Redirecting to login...
+          {success}
         </div>
       )}
 
