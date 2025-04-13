@@ -3,20 +3,25 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
+interface ApiError {
+  message: string;
+  status?: number;
+}
+
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState<ApiError | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError(null);
     setMessage('');
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/forgot-password', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/forgot-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -32,7 +37,7 @@ export default function ForgotPassword() {
 
       setMessage('If an account exists with this email, you will receive password reset instructions.');
     } catch (err: any) {
-      setError(err.message || 'Failed to send reset email. Please try again later.');
+      setError({ message: err.message || 'Failed to send reset email. Please try again later.' });
     } finally {
       setIsLoading(false);
     }
@@ -64,7 +69,7 @@ export default function ForgotPassword() {
 
           {error && (
             <div className="text-red-500 text-sm bg-red-50 p-3 rounded-md">
-              {error}
+              {error.message}
             </div>
           )}
 

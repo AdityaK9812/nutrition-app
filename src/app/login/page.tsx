@@ -4,12 +4,17 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+interface ApiError {
+  message: string;
+  status?: number;
+}
+
 export default function Login() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState<ApiError | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -23,12 +28,12 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError(null);
     setIsLoading(true);
 
     try {
       console.log('Attempting login...');
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +60,7 @@ export default function Login() {
       }
     } catch (err: any) {
       console.error('Login error:', err);
-      setError(err.message || 'Cannot connect to server. Please try again later.');
+      setError({ message: err.message || 'Cannot connect to server. Please try again later.' });
       sessionStorage.removeItem('authToken');
       sessionStorage.removeItem('userEmail');
     } finally {
@@ -108,7 +113,7 @@ export default function Login() {
 
           {error && (
             <div className="text-red-500 text-sm bg-red-50 p-3 rounded-md">
-              {error}
+              {error.message}
             </div>
           )}
 
@@ -127,9 +132,9 @@ export default function Login() {
             {isLoading ? 'Signing in...' : 'Sign In'}
           </button>
 
-          <div className="text-center text-gray-600">
-            Don't have an account?{' '}
-            <Link href="/signup" className="text-[#8B4513] hover:text-[#5C2D0C]">
+          <div className="text-center text-sm text-gray-600">
+            Don&apos;t have an account?{' '}
+            <Link href="/signup" className="text-green-600 hover:text-green-700">
               Sign up
             </Link>
           </div>

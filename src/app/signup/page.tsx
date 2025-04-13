@@ -4,32 +4,39 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+interface ApiError {
+  message: string;
+  status?: number;
+}
+
 export default function Signup() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<ApiError | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setIsLoading(true);
+    setError(null);
+    setLoading(true);
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      setIsLoading(false);
+    if (formData.password !== formData.confirmPassword) {
+      setError({ message: 'Passwords do not match' });
+      setLoading(false);
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/signup', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email: formData.email, password: formData.password })
       });
 
       const data = await response.json();
@@ -39,12 +46,12 @@ export default function Signup() {
       }
 
       // Automatically log in after successful signup
-      const loginResponse = await fetch('http://localhost:5000/api/auth/login', {
+      const loginResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email: formData.email, password: formData.password })
       });
 
       const loginData = await loginResponse.json();
@@ -55,13 +62,13 @@ export default function Signup() {
 
       if (loginData.token) {
         sessionStorage.setItem('authToken', loginData.token);
-        sessionStorage.setItem('userEmail', email);
+        sessionStorage.setItem('userEmail', formData.email);
         router.push('/');
       }
     } catch (err: any) {
-      setError(err.message || 'Failed to create account. Please try again later.');
+      setError({ message: err.message || 'Failed to create account. Please try again later.' });
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
@@ -79,12 +86,12 @@ export default function Signup() {
             <input
               id="email"
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="youremail@example.com"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
               required
-              disabled={isLoading}
+              disabled={loading}
             />
           </div>
 
@@ -93,11 +100,11 @@ export default function Signup() {
             <input
               id="password"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
               required
-              disabled={isLoading}
+              disabled={loading}
             />
           </div>
 
@@ -106,26 +113,26 @@ export default function Signup() {
             <input
               id="confirmPassword"
               type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={formData.confirmPassword}
+              onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
               required
-              disabled={isLoading}
+              disabled={loading}
             />
           </div>
 
           {error && (
             <div className="text-red-500 text-sm bg-red-50 p-3 rounded-md">
-              {error}
+              {error.message}
             </div>
           )}
 
           <button
             type="submit"
             className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-[#0B4A0B] hover:bg-[#083708] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
-            disabled={isLoading}
+            disabled={loading}
           >
-            {isLoading ? 'Creating Account...' : 'Create Account'}
+            {loading ? 'Creating Account...' : 'Create Account'}
           </button>
 
           <div className="text-center text-gray-600">
