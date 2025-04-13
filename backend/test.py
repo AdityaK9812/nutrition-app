@@ -42,7 +42,7 @@ CORS(app, resources={
         ],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization", "Accept"],
-        "supports_credentials": True,
+        "supports_credentials": False,
         "max_age": 3600,
         "expose_headers": ["Content-Type", "Authorization"]
     }
@@ -59,11 +59,13 @@ def handle_preflight():
             "https://nutrition-app-beta.vercel.app"
         ]
         if origin in allowed_origins:
-            response.headers["Access-Control-Allow-Origin"] = origin
-            response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
-            response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
-            response.headers["Access-Control-Max-Age"] = "3600"
-            response.headers["Access-Control-Allow-Credentials"] = "true"
+            response.headers.update({
+                "Access-Control-Allow-Origin": origin,
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                "Access-Control-Max-Age": "3600",
+                "Access-Control-Allow-Credentials": "false"
+            })
         return response
 
 # Add CORS headers to all responses
@@ -75,10 +77,12 @@ def after_request(response):
         "https://nutrition-app-beta.vercel.app"
     ]
     if origin in allowed_origins:
-        response.headers["Access-Control-Allow-Origin"] = origin
-        response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
-        response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers.update({
+            "Access-Control-Allow-Origin": origin,
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+            "Access-Control-Allow-Credentials": "false"
+        })
     return response
 
 # User storage (for testing purposes)
@@ -500,7 +504,21 @@ def reset_password():
 @app.route("/api/auth/forgot-password", methods=["POST", "OPTIONS"])
 def forgot_password():
     if request.method == "OPTIONS":
-        return "", 200
+        response = app.make_default_options_response()
+        origin = request.headers.get('Origin', '')
+        allowed_origins = [
+            "http://localhost:3000",
+            "https://nutrition-app-beta.vercel.app"
+        ]
+        if origin in allowed_origins:
+            response.headers.update({
+                "Access-Control-Allow-Origin": origin,
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                "Access-Control-Max-Age": "3600",
+                "Access-Control-Allow-Credentials": "false"
+            })
+        return response
 
     try:
         print("\n=== Starting Forgot Password Process ===")
