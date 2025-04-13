@@ -36,7 +36,7 @@ print(f"SMTP Configuration loaded - Username: {smtp_user}, Password: {smtp_pass}
 # Configure CORS
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["http://localhost:3000", "https://nutrition-app-main.vercel.app"],
+        "origins": ["http://localhost:3000", "https://nutrition-app-main.vercel.app", "https://nutrition-app-beta.vercel.app"],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization", "Accept"],
         "supports_credentials": True,
