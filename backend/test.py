@@ -3,9 +3,489 @@ from flask_cors import CORS
 import os
 import json
 from typing import Dict
+import jwt
+from datetime import datetime, timedelta
+import bcrypt
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import secrets
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+
+# JWT Configuration
+JWT_SECRET = os.getenv("JWT_SECRET_KEY", "your-secret-key")
+JWT_ALGORITHM = "HS256"
+JWT_EXPIRATION_MINUTES = 30
+
+# SMTP Configuration
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = 587
+SMTP_USERNAME = os.getenv("SMTP_USERNAME")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
+
+# Print SMTP configuration for debugging (without showing the full password)
+smtp_user = SMTP_USERNAME
+smtp_pass = SMTP_PASSWORD[:4] + '****' if SMTP_PASSWORD else None
+print(f"SMTP Configuration loaded - Username: {smtp_user}, Password: {smtp_pass}")
+
+# Configure CORS
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["http://localhost:3000"],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization", "Accept"],
+        "supports_credentials": True,
+        "max_age": 3600
+    }
+})
+
+# User storage (for testing purposes)
+USERS = {}
+
+# File paths for persistent storage
+USERS_FILE = os.path.join(os.path.dirname(__file__), 'users.json')
+TOKENS_FILE = os.path.join(os.path.dirname(__file__), 'reset_tokens.json')
+
+def load_users():
+    try:
+        if os.path.exists(USERS_FILE):
+            with open(USERS_FILE, 'r', encoding='utf-8') as f:
+                users_data = json.load(f)
+                print(f"Loaded users: {users_data}")  # Debug print
+                return users_data
+        return {}
+    except Exception as e:
+        print(f"Error loading users: {str(e)}")
+        return {}
+
+def save_users(users_data):
+    try:
+        with open(USERS_FILE, 'w', encoding='utf-8') as f:
+            json.dump(users_data, f, indent=2)
+            print(f"Saved users to file: {users_data}")  # Debug print
+    except Exception as e:
+        print(f"Error saving users: {str(e)}")
+        raise
+
+def load_reset_tokens():
+    """Load reset tokens from file"""
+    try:
+        if os.path.exists(TOKENS_FILE):
+            with open(TOKENS_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        return {}
+    except Exception as e:
+        print(f"Error loading reset tokens: {str(e)}")
+        return {}
+
+def save_reset_tokens(tokens_data):
+    """Save reset tokens to file"""
+    try:
+        with open(TOKENS_FILE, 'w', encoding='utf-8') as f:
+            json.dump(tokens_data, f, indent=2)
+    except Exception as e:
+        print(f"Error saving reset tokens: {str(e)}")
+        raise e
+
+# Initialize users from file
+USERS.update(load_users())
+
+# Initialize reset tokens
+reset_tokens = load_reset_tokens()
+
+def create_token(email: str) -> str:
+    expiration = datetime.utcnow() + timedelta(minutes=JWT_EXPIRATION_MINUTES)
+    return jwt.encode(
+        {"sub": email, "exp": expiration},
+        JWT_SECRET,
+        algorithm=JWT_ALGORITHM
+    )
+
+def verify_token(token: str) -> Dict:
+    try:
+        return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+    except jwt.ExpiredSignatureError:
+        raise Exception("Token has expired")
+    except jwt.InvalidTokenError:
+        raise Exception("Invalid token")
+
+def send_reset_email(email: str, reset_token: str) -> bool:
+    try:
+        print("\n=== Starting Email Send Process ===")
+        print(f"SMTP_USERNAME: {SMTP_USERNAME}")
+        print(f"SMTP_PASSWORD length: {len(SMTP_PASSWORD) if SMTP_PASSWORD else 0}")
+        
+        if not SMTP_USERNAME:
+            print("Error: SMTP_USERNAME not found in environment variables")
+            return False
+        if not SMTP_PASSWORD:
+            print("Error: SMTP_PASSWORD not found in environment variables")
+            return False
+
+        print(f"Preparing to send email to: {email}")
+        
+        msg = MIMEMultipart()
+        msg['From'] = f"NutriSmart <{SMTP_USERNAME}>"
+        msg['To'] = email
+        msg['Subject'] = "Password Reset Request - NutriSmart"
+
+        # Create reset link with both token and email
+        reset_link = f"http://localhost:3000/reset-password?token={reset_token}&email={email}"
+        
+        # Email body
+        body = f"""
+        <html>
+            <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <div style="background-color: #F4FFF4; padding: 20px; border-radius: 10px;">
+                    <h2 style="color: #0B4A0B;">Password Reset Request</h2>
+                    <p>Hello,</p>
+                    <p>We received a request to reset your password for your NutriSmart account.</p>
+                    <p>Click the button below to reset your password:</p>
+                    <div style="text-align: center; margin: 30px 0;">
+                        <a href="{reset_link}" style="background-color: #0B4A0B; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">
+                            Reset Password
+                        </a>
+                    </div>
+                    <p>If the button doesn't work, copy and paste this link into your browser:</p>
+                    <p style="word-break: break-all;"><a href="{reset_link}" style="color: #0B4A0B;">{reset_link}</a></p>
+                    <p>This link will expire in 24 hours.</p>
+                    <p>If you did not request this password reset, please ignore this email.</p>
+                    <p style="margin-top: 30px; color: #666; font-size: 12px;">
+                        Best regards,<br>
+                        The NutriSmart Team
+                    </p>
+                </div>
+            </body>
+        </html>
+        """
+
+        msg.attach(MIMEText(body, 'html'))
+
+        # Send email
+        print("Connecting to SMTP server...")
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.set_debuglevel(1)  # Enable debug output
+            print("Starting TLS...")
+            server.starttls()
+            print("Logging in to SMTP server...")
+            server.login(SMTP_USERNAME, SMTP_PASSWORD)
+            print("Sending email...")
+            server.send_message(msg)
+            print("Email sent successfully!")
+            print("=== Email Send Process Complete ===\n")
+            return True
+        
+    except smtplib.SMTPAuthenticationError as e:
+        print(f"\nSMTP Authentication Error: {str(e)}")
+        print("Please check your SMTP credentials")
+        return False
+    except smtplib.SMTPException as e:
+        print(f"\nSMTP Error: {str(e)}")
+        return False
+    except Exception as e:
+        print(f"\nUnexpected error sending reset email: {str(e)}")
+        print(f"Error type: {type(e)}")
+        import traceback
+        traceback.print_exc()
+        return False
+
+@app.route("/api/auth/signup", methods=["POST", "OPTIONS"])
+def signup():
+    if request.method == "OPTIONS":
+        return "", 200
+        
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "No data provided"}), 400
+
+        email = data.get("email")
+        password = data.get("password")
+
+        if not email or not password:
+            return jsonify({"error": "Email and password are required"}), 400
+
+        # Load latest users
+        global USERS
+        USERS = load_users()
+
+        if email in USERS:
+            return jsonify({"error": "Email already registered"}), 400
+
+        # Hash password
+        salt = bcrypt.gensalt()
+        hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+
+        # Store user
+        USERS[email] = {
+            "email": email,
+            "password": hashed.decode('utf-8')
+        }
+
+        # Save to file
+        save_users(USERS)
+        print(f"New user registered: {email}")  # Debug print
+
+        # Create and return token
+        token = create_token(email)
+        return jsonify({
+            "token": token,
+            "authenticated": True,
+            "email": email
+        })
+    except Exception as e:
+        print(f"Signup error: {str(e)}")
+        return jsonify({"error": "An error occurred during signup"}), 500
+
+@app.route("/api/auth/login", methods=["POST", "OPTIONS"])
+def login():
+    if request.method == "OPTIONS":
+        return "", 200
+        
+    try:
+        print("\n=== Login Attempt ===")
+        data = request.get_json()
+        if not data:
+            print("No data provided in request")
+            return jsonify({"error": "No data provided"}), 400
+            
+        email = data.get("email")
+        password = data.get("password")
+
+        print(f"Login attempt for email: {email}")
+        print(f"Password provided (length): {len(password) if password else 0}")
+
+        if not email or not password:
+            print("Missing email or password")
+            return jsonify({"error": "Email and password are required"}), 400
+
+        # Load latest users
+        global USERS
+        USERS = load_users()
+        print(f"Current users in system: {list(USERS.keys())}")
+        print(f"Full user data: {USERS}")
+
+        if email not in USERS:
+            print(f"User not found: {email}")
+            return jsonify({"error": "Invalid email or password"}), 401
+
+        stored_password = USERS[email]["password"]
+        print(f"Stored password hash: {stored_password}")
+        
+        try:
+            # Convert password to bytes if it's a string
+            if isinstance(password, str):
+                password = password.encode('utf-8')
+            if isinstance(stored_password, str):
+                stored_password = stored_password.encode('utf-8')
+                
+            print(f"Password type: {type(password)}")
+            print(f"Stored password type: {type(stored_password)}")
+            
+            password_matches = bcrypt.checkpw(password, stored_password)
+            print(f"Password verification result: {password_matches}")
+            
+            if not password_matches:
+                print("Password verification failed")
+                return jsonify({"error": "Invalid email or password"}), 401
+                
+        except Exception as e:
+            print(f"Error during password verification: {str(e)}")
+            print(f"Error type: {type(e)}")
+            import traceback
+            traceback.print_exc()
+            return jsonify({"error": "Error verifying password"}), 500
+
+        token = create_token(email)
+        print(f"Login successful for {email}")
+        print("=== End Login Attempt ===\n")
+        return jsonify({
+            "token": token,
+            "authenticated": True,
+            "email": email
+        })
+    except Exception as e:
+        print(f"Login error: {str(e)}")
+        print(f"Error type: {type(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": "An error occurred during login"}), 500
+
+@app.route("/api/auth/verify", methods=["GET", "OPTIONS"])
+def verify():
+    if request.method == "OPTIONS":
+        return "", 200
+        
+    try:
+        auth_header = request.headers.get("Authorization")
+        if not auth_header or not auth_header.startswith("Bearer "):
+            return jsonify({"error": "Missing or invalid token"}), 401
+
+        token = auth_header.split(" ")[1]
+        payload = verify_token(token)
+        return jsonify({"email": payload["sub"]})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 401
+
+@app.route("/api/auth/reset-password", methods=["POST", "OPTIONS"])
+def reset_password():
+    if request.method == "OPTIONS":
+        return "", 200
+        
+    try:
+        print("\n=== Password Reset Attempt ===")
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+
+        token = data.get('token')
+        email = data.get('email')
+        new_password = data.get('password')
+
+        print(f"Reset attempt for email: {email}")
+
+        if not all([token, email, new_password]):
+            return jsonify({'error': 'Missing required fields'}), 400
+
+        # Load and verify token
+        reset_tokens = load_reset_tokens()
+        print(f"Looking for token in reset tokens")
+        token_data = reset_tokens.get(token)
+
+        if not token_data:
+            print(f"Token not found in reset tokens")
+            return jsonify({'error': 'Invalid or expired reset token'}), 400
+
+        print(f"Found token data: {token_data}")
+
+        # Check if token is expired
+        try:
+            expiration_time = datetime.fromisoformat(token_data['exp'])
+            if expiration_time < datetime.utcnow():
+                print(f"Token expired")
+                reset_tokens.pop(token, None)
+                save_reset_tokens(reset_tokens)
+                return jsonify({'error': 'Reset token has expired'}), 400
+        except Exception as e:
+            print(f"Error checking token expiration: {str(e)}")
+            return jsonify({'error': 'Invalid reset token format'}), 400
+
+        # Verify email matches token
+        if email != token_data['email']:
+            print(f"Email mismatch")
+            return jsonify({'error': 'Invalid reset token'}), 400
+
+        try:
+            # Load current users
+            with open(USERS_FILE, 'r', encoding='utf-8') as f:
+                users_data = json.load(f)
+                print(f"Current users data: {users_data}")
+
+            if email not in users_data:
+                print(f"User not found in database")
+                return jsonify({'error': 'User not found'}), 404
+
+            # Hash new password
+            salt = bcrypt.gensalt()
+            hashed = bcrypt.hashpw(new_password.encode('utf-8'), salt)
+            hashed_str = hashed.decode('utf-8')
+            
+            # Update user's password
+            users_data[email]['password'] = hashed_str
+            
+            # Save updated users data
+            with open(USERS_FILE, 'w', encoding='utf-8') as f:
+                json.dump(users_data, f, indent=2)
+                print(f"Updated users file with new password")
+
+            # Update global USERS dictionary
+            global USERS
+            USERS = users_data
+            print(f"Updated global USERS dictionary")
+
+            # Remove used token
+            reset_tokens.pop(token, None)
+            save_reset_tokens(reset_tokens)
+            print(f"Removed used token")
+
+            # Create new auth token
+            auth_token = create_token(email)
+            
+            print("=== Password Reset Successful ===")
+            
+            return jsonify({
+                'message': 'Password has been reset successfully',
+                'token': auth_token,
+                'email': email
+            }), 200
+
+        except Exception as e:
+            print(f"Error updating password: {str(e)}")
+            return jsonify({'error': 'Failed to update password'}), 500
+
+    except Exception as e:
+        print(f"Reset password error: {str(e)}")
+        return jsonify({'error': 'An error occurred while resetting the password'}), 500
+
+@app.route("/api/auth/forgot-password", methods=["POST", "OPTIONS"])
+def forgot_password():
+    if request.method == "OPTIONS":
+        return "", 200
+
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+            
+        email = data.get('email')
+        if not email:
+            return jsonify({'error': 'Email is required'}), 400
+
+        # Load latest users
+        global USERS
+        USERS = load_users()
+        print(f"Checking reset password for email: {email}")  # Debug print
+        
+        if email not in USERS:
+            print(f"User not found for reset password: {email}")  # Debug print
+            # Don't reveal if email exists or not
+            return jsonify({
+                'message': 'If an account exists with this email, you will receive password reset instructions.'
+            }), 200
+
+        # Generate a secure token
+        token = secrets.token_urlsafe(32)
+        
+        # Store the token with expiration time (24 hours)
+        global reset_tokens
+        reset_tokens = load_reset_tokens()
+        expiration_time = datetime.utcnow() + timedelta(days=1)
+        reset_tokens[token] = {
+            'email': email,
+            'exp': expiration_time.isoformat()
+        }
+        save_reset_tokens(reset_tokens)
+
+        # Send reset email
+        email_sent = send_reset_email(email, token)
+        print(f"Reset email sent status: {email_sent}")  # Debug print
+        
+        if email_sent:
+            return jsonify({
+                'message': 'If an account exists with this email, you will receive password reset instructions.'
+            }), 200
+        else:
+            print("Failed to send reset email")  # Debug print
+            return jsonify({'error': 'Failed to send reset email. Please try again later.'}), 500
+
+    except Exception as e:
+        print(f"Forgot password error: {str(e)}")
+        return jsonify({'error': 'An error occurred while processing your request'}), 500
 
 # Load food database
 def load_food_database():

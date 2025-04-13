@@ -49,6 +49,8 @@ const isLiquidFood = (foodName: string): boolean => {
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [foodQuery, setFoodQuery] = useState('');
   const [quantity, setQuantity] = useState('100');
   const [unit, setUnit] = useState('g');
@@ -60,6 +62,38 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = sessionStorage.getItem('authToken');
+      if (!token) {
+        window.location.href = '/login';
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/verify', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Invalid token');
+        }
+
+        setIsAuthenticated(true);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Auth verification failed:', error);
+        sessionStorage.removeItem('authToken');
+        sessionStorage.removeItem('userEmail');
+        window.location.href = '/login';
+      }
+    };
+
+    checkAuth();
   }, []);
 
   useEffect(() => {
@@ -166,7 +200,25 @@ export default function Home() {
     }
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('authToken');
+    sessionStorage.removeItem('userEmail');
+    window.location.href = '/login';
+  };
+
   if (!mounted) {
+    return null;
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
     return null;
   }
 
@@ -183,6 +235,16 @@ export default function Home() {
         />
       </div>
       
+      {/* Logout Button */}
+      <div className="absolute top-4 right-4 z-50">
+        <button
+          onClick={handleLogout}
+          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+        >
+          Logout
+        </button>
+      </div>
+      
       {/* Content Container with backdrop blur */}
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -196,9 +258,9 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Search Section with stronger backdrop */}
+          {/* Search Section */}
           <div className="space-y-4 sm:space-y-8">
-            <form onSubmit={handleSearch} className="search-container mx-2 sm:mx-0 p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg border border-amber-100 dark:border-amber-900/20">
+            <form onSubmit={handleSearch} className="search-container mx-2 sm:mx-0 p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg">
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex-1 min-w-0 relative">
                   <input
@@ -207,20 +269,20 @@ export default function Home() {
                     onChange={handleQueryChange}
                     onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                     placeholder="Search for any food..."
-                    className="input-modern w-full h-14 sm:h-11 text-base sm:text-sm rounded-xl border-amber-200 dark:border-amber-900/30 focus:border-amber-500 dark:focus:border-amber-700 focus:ring-amber-500 dark:focus:ring-amber-700"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     required
                   />
-                  
+                 
                   {suggestions.length > 0 && showSuggestions && (
-                    <div className="search-results fixed sm:absolute left-2 right-2 sm:left-0 sm:right-0 sm:relative z-50 bg-white dark:bg-slate-800 shadow-xl">
+                    <div className="absolute left-0 right-0 mt-1 max-h-60 overflow-auto bg-white dark:bg-slate-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 z-50">
                       {suggestions.map((suggestion, index) => (
                         <div
                           key={index}
-                          className="search-result-item p-4 sm:p-3 text-base sm:text-sm border-b border-gray-200 dark:border-gray-700"
+                          className="p-3 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer border-b border-gray-200 dark:border-gray-700 transition-colors"
                           onClick={() => handleSuggestionClick(suggestion)}
                         >
-                          <span className="font-medium text-slate-900 dark:text-white block sm:inline">{suggestion.name}</span>
-                          <span className="text-sm text-slate-700 dark:text-slate-300 block sm:inline sm:ml-2">
+                          <span className="font-medium text-slate-900 dark:text-white">{suggestion.name}</span>
+                          <span className="text-sm text-slate-600 dark:text-slate-300 ml-2">
                             (100 {isLiquidFood(suggestion.name) ? 'ml' : 'g'})
                           </span>
                         </div>
@@ -228,40 +290,34 @@ export default function Home() {
                     </div>
                   )}
                 </div>
-                <div className="flex gap-4 sm:w-auto">
-                  <div className="flex-1 sm:w-24">
-                    <input
-                      type="number"
-                      value={quantity}
-                      onChange={(e) => setQuantity(e.target.value)}
-                      className="quantity-input w-full h-14 sm:h-11 text-base sm:text-sm"
-                      min="1"
-                      required
-                    />
-                  </div>
-                  <div className="flex-1 sm:w-24">
-                    <select
-                      value={unit}
-                      onChange={(e) => setUnit(e.target.value)}
-                      className="unit-select w-full h-14 sm:h-11 text-base sm:text-sm"
-                    >
-                      <option value={isLiquidFood(foodQuery) ? 'ml' : 'g'}>
-                        {isLiquidFood(foodQuery) ? 'ml' : 'g'}
-                      </option>
-                      <option value="oz">ounces</option>
-                    </select>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    className="w-24 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    min="0"
+                    required
+                  />
+                  <select
+                    value={unit}
+                    onChange={(e) => setUnit(e.target.value)}
+                    className="w-24 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-white"
+                    required
+                  >
+                    <option value={isLiquidFood(foodQuery) ? 'ml' : 'g'}>
+                      {isLiquidFood(foodQuery) ? 'ml' : 'g'}
+                    </option>
+                    <option value="oz">ounces</option>
+                  </select>
+                  <button
+                    type="submit"
+                    className="px-6 py-2 bg-[#0B4A0B] text-white rounded-md hover:bg-[#083708] focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors"
+                    disabled={loading}
+                  >
+                    {loading ? 'Searching...' : 'Get Nutrition'}
+                  </button>
                 </div>
-                <button
-                  type="submit"
-                  className="w-full sm:w-auto h-14 sm:h-11 px-8 py-0 bg-green-800 hover:bg-green-900 text-white font-bold rounded-xl shadow-lg transition-all duration-200 hover:scale-105 focus:ring-4 focus:ring-green-700 focus:ring-opacity-50 text-base sm:text-sm"
-                >
-                  {loading ? (
-                    <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto" />
-                  ) : (
-                    'Search'
-                  )}
-                </button>
               </div>
             </form>
 
