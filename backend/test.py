@@ -36,15 +36,7 @@ print(f"SMTP Configuration loaded - Username: {smtp_user}, Password: {smtp_pass}
 # Configure CORS for specific origins
 CORS(app, resources={
     r"/api/*": {
-        "origins": [
-            "http://localhost:3000",
-            "https://nutrition-app-beta.vercel.app",
-            "https://nutrition-app-main.vercel.app",
-            "https://nutrition-40sdsbph0-adityas-projects-4e6166af.vercel.app",
-            "https://nutrition-n935sca5q-adityas-projects-4e6166af.vercel.app",
-            # Allow all Vercel preview deployments
-            r"^https://nutrition-.*\.vercel\.app$"
-        ],
+        "origins": "*",  # Allow all origins temporarily
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization", "Accept"],
         "supports_credentials": True,
@@ -58,28 +50,22 @@ CORS(app, resources={
 def handle_preflight():
     if request.method == "OPTIONS":
         response = app.make_default_options_response()
-        # Get the Origin header from the request
-        origin = request.headers.get('Origin', '')
-        # Check if the origin matches any of our allowed patterns
-        allowed_origins = app.config['CORS_ORIGINS'] if 'CORS_ORIGINS' in app.config else [
-            "http://localhost:3000",
-            "https://nutrition-app-beta.vercel.app",
-            "https://nutrition-app-main.vercel.app",
-            "https://nutrition-40sdsbph0-adityas-projects-4e6166af.vercel.app",
-            "https://nutrition-n935sca5q-adityas-projects-4e6166af.vercel.app"
-        ]
-        
-        # Also allow any Vercel preview deployments
-        if origin.startswith('https://nutrition-') and origin.endswith('.vercel.app'):
-            allowed_origins.append(origin)
-            
-        if origin in allowed_origins:
-            response.headers["Access-Control-Allow-Origin"] = origin
-            response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
-            response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
-            response.headers["Access-Control-Max-Age"] = "3600"
-            response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers["Access-Control-Allow-Origin"] = request.headers.get('Origin', '*')
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
+        response.headers["Access-Control-Max-Age"] = "3600"
+        response.headers["Access-Control-Allow-Credentials"] = "true"
         return response
+
+# Add CORS headers to all responses
+@app.after_request
+def after_request(response):
+    origin = request.headers.get('Origin', '*')
+    response.headers["Access-Control-Allow-Origin"] = origin
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    return response
 
 # User storage (for testing purposes)
 USERS = {}
