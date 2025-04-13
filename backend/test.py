@@ -33,10 +33,14 @@ smtp_user = SMTP_USERNAME
 smtp_pass = SMTP_PASSWORD[:4] + '****' if SMTP_PASSWORD else None
 print(f"SMTP Configuration loaded - Username: {smtp_user}, Password: {smtp_pass}")
 
-# Configure CORS
+# Configure CORS for specific origins
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["http://localhost:3000", "https://nutrition-app-main.vercel.app", "https://nutrition-app-beta.vercel.app"],
+        "origins": [
+            "http://localhost:3000",
+            "https://nutrition-app-beta.vercel.app",
+            "https://nutrition-app-main.vercel.app"
+        ],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization", "Accept"],
         "supports_credentials": True,
@@ -720,5 +724,5 @@ def search_foods():
     return jsonify(matches)
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port, debug=False)
