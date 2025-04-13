@@ -4,15 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-interface ApiError extends Error {
-  status?: number;
-  response?: {
-    data?: {
-      message?: string;
-    };
-  };
-}
-
 export default function Login() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);

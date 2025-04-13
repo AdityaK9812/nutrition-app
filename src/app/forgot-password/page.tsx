@@ -3,15 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-interface ApiError extends Error {
-  status?: number;
-  response?: {
-    data?: {
-      message?: string;
-    };
-  };
-}
-
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');

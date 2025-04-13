@@ -4,15 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-interface ApiError extends Error {
-  status?: number;
-  response?: {
-    data?: {
-      message?: string;
-    };
-  };
-}
-
 export default function Signup() {
   const router = useRouter();
   const [formData, setFormData] = useState({
