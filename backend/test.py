@@ -36,7 +36,10 @@ print(f"SMTP Configuration loaded - Username: {smtp_user}, Password: {smtp_pass}
 # Configure CORS for specific origins
 CORS(app, resources={
     r"/api/*": {
-        "origins": "*",  # Allow all origins temporarily
+        "origins": [
+            "http://localhost:3000",
+            "https://nutrition-app-beta.vercel.app"
+        ],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization", "Accept"],
         "supports_credentials": True,
@@ -50,21 +53,32 @@ CORS(app, resources={
 def handle_preflight():
     if request.method == "OPTIONS":
         response = app.make_default_options_response()
-        response.headers["Access-Control-Allow-Origin"] = request.headers.get('Origin', '*')
-        response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
-        response.headers["Access-Control-Max-Age"] = "3600"
-        response.headers["Access-Control-Allow-Credentials"] = "true"
+        origin = request.headers.get('Origin', '')
+        allowed_origins = [
+            "http://localhost:3000",
+            "https://nutrition-app-beta.vercel.app"
+        ]
+        if origin in allowed_origins:
+            response.headers["Access-Control-Allow-Origin"] = origin
+            response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+            response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
+            response.headers["Access-Control-Max-Age"] = "3600"
+            response.headers["Access-Control-Allow-Credentials"] = "true"
         return response
 
 # Add CORS headers to all responses
 @app.after_request
 def after_request(response):
-    origin = request.headers.get('Origin', '*')
-    response.headers["Access-Control-Allow-Origin"] = origin
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
+    origin = request.headers.get('Origin', '')
+    allowed_origins = [
+        "http://localhost:3000",
+        "https://nutrition-app-beta.vercel.app"
+    ]
+    if origin in allowed_origins:
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
+        response.headers["Access-Control-Allow-Credentials"] = "true"
     return response
 
 # User storage (for testing purposes)
@@ -142,6 +156,8 @@ def send_reset_email(email: str, reset_token: str) -> bool:
         print("\n=== Starting Email Send Process ===")
         print(f"SMTP_USERNAME: {SMTP_USERNAME}")
         print(f"SMTP_PASSWORD length: {len(SMTP_PASSWORD) if SMTP_PASSWORD else 0}")
+        print(f"SMTP_SERVER: {SMTP_SERVER}")
+        print(f"SMTP_PORT: {SMTP_PORT}")
         
         if not SMTP_USERNAME:
             print("Error: SMTP_USERNAME not found in environment variables")
@@ -158,10 +174,11 @@ def send_reset_email(email: str, reset_token: str) -> bool:
         msg['Subject'] = "Password Reset Request - NutriSmart"
 
         # Create reset link with token
-        frontend_url = os.getenv("FRONTEND_URL", "https://nutrition-n935sca5q-adityas-projects-4e6166af.vercel.app")
+        frontend_url = os.getenv("FRONTEND_URL", "https://nutrition-app-beta.vercel.app")
         reset_link = f"{frontend_url}/reset-password?token={reset_token}&email={email}"
         
         print(f"Reset link generated: {reset_link}")
+        print(f"Frontend URL: {frontend_url}")
 
         # Plain text version
         text = f"""
@@ -216,16 +233,30 @@ def send_reset_email(email: str, reset_token: str) -> bool:
         print("Connecting to SMTP server...")
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
             server.set_debuglevel(1)  # Enable debug output
+            print("Starting TLS...")
             server.starttls()
-            print("Connected to SMTP server, attempting login...")
+            print(f"Connected to SMTP server {SMTP_SERVER}:{SMTP_PORT}, attempting login with username: {SMTP_USERNAME}")
             server.login(SMTP_USERNAME, SMTP_PASSWORD)
-            print("Logged in successfully, sending email...")
+            print("SMTP Login successful!")
+            print("Sending email message...")
             server.send_message(msg)
             print("Email sent successfully!")
+            print("=== Email Send Process Complete ===\n")
             return True
 
+    except smtplib.SMTPAuthenticationError as e:
+        print(f"SMTP Authentication Error: {str(e)}")
+        print("Please check your SMTP credentials (username and password)")
+        return False
+    except smtplib.SMTPException as e:
+        print(f"SMTP Error: {str(e)}")
+        print(f"Error type: {type(e)}")
+        return False
     except Exception as e:
-        print(f"Error sending email: {str(e)}")
+        print(f"Unexpected error sending reset email: {str(e)}")
+        print(f"Error type: {type(e)}")
+        import traceback
+        traceback.print_exc()
         return False
 
 @app.route("/api/auth/signup", methods=["POST", "OPTIONS"])
@@ -472,28 +503,36 @@ def forgot_password():
         return "", 200
 
     try:
+        print("\n=== Starting Forgot Password Process ===")
         data = request.get_json()
         if not data:
+            print("No data provided in request")
             return jsonify({'error': 'No data provided'}), 400
             
         email = data.get('email')
         if not email:
+            print("No email provided in request")
             return jsonify({'error': 'Email is required'}), 400
+
+        print(f"Processing forgot password request for email: {email}")
 
         # Load latest users
         global USERS
         USERS = load_users()
-        print(f"Checking reset password for email: {email}")  # Debug print
+        print(f"Loaded users from database. Available emails: {list(USERS.keys())}")
         
         if email not in USERS:
-            print(f"User not found for reset password: {email}")  # Debug print
+            print(f"Email {email} not found in users database")
             # Don't reveal if email exists or not
             return jsonify({
                 'message': 'If an account exists with this email, you will receive password reset instructions.'
             }), 200
 
+        print(f"User found for email: {email}")
+
         # Generate a secure token
         token = secrets.token_urlsafe(32)
+        print(f"Generated reset token: {token[:10]}...")
         
         # Store the token with expiration time (24 hours)
         global reset_tokens
@@ -504,21 +543,27 @@ def forgot_password():
             'exp': expiration_time.isoformat()
         }
         save_reset_tokens(reset_tokens)
+        print(f"Saved reset token to database with expiration: {expiration_time}")
 
         # Send reset email
+        print("Attempting to send reset email...")
         email_sent = send_reset_email(email, token)
-        print(f"Reset email sent status: {email_sent}")  # Debug print
-        
+        print(f"Reset email sent status: {email_sent}")
+
         if email_sent:
+            print("=== Forgot Password Process Completed Successfully ===\n")
             return jsonify({
                 'message': 'If an account exists with this email, you will receive password reset instructions.'
             }), 200
         else:
-            print("Failed to send reset email")  # Debug print
+            print("Failed to send reset email")
             return jsonify({'error': 'Failed to send reset email. Please try again later.'}), 500
 
     except Exception as e:
         print(f"Forgot password error: {str(e)}")
+        print(f"Error type: {type(e)}")
+        import traceback
+        traceback.print_exc()
         return jsonify({'error': 'An error occurred while processing your request'}), 500
 
 # Load food database
