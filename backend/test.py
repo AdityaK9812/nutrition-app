@@ -36,7 +36,7 @@ print(f"SMTP Configuration loaded - Username: {smtp_user}, Password: {smtp_pass}
 # Configure CORS
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["http://localhost:3000"],
+        "origins": ["http://localhost:3000", "https://nutrition-app-main.vercel.app"],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization", "Accept"],
         "supports_credentials": True,
@@ -134,8 +134,9 @@ def send_reset_email(email: str, reset_token: str) -> bool:
         msg['To'] = email
         msg['Subject'] = "Password Reset Request - NutriSmart"
 
-        # Create reset link with both token and email
-        reset_link = f"http://localhost:3000/reset-password?token={reset_token}&email={email}"
+        # Create reset link with token
+        frontend_url = os.getenv("FRONTEND_URL", "https://nutrition-app-main.vercel.app")
+        reset_link = f"{frontend_url}/reset-password?token={reset_token}"
         
         # Email body
         body = f"""
