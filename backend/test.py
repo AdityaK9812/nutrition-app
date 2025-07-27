@@ -28,7 +28,7 @@ def handle_preflight():
         response.headers.update({
             "Access-Control-Allow-Origin": origin,
             "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type", "Authorization, Accept",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
             "Access-Control-Max-Age": "3600",
             "Access-Control-Allow-Credentials": "false"
         })
@@ -43,7 +43,7 @@ def after_request(response):
     response.headers.update({
         "Access-Control-Allow-Origin": origin,
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type", "Authorization, Accept",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
         "Access-Control-Allow-Credentials": "false"
     })
     return response
