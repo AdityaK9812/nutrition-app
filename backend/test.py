@@ -5,15 +5,10 @@ import json
 
 app = Flask(__name__)
 
-# Configure CORS for specific origins
+# Configure CORS for all origins
 CORS(app, resources={
     r"/api/*": {
-        "origins": [
-            "http://localhost:3000",
-            "https://nutrition-app-beta.vercel.app",
-            "https://nutrition-r3v8rjfk6-adityas-projects-4e6166af.vercel.app",
-            "https://*.vercel.app"  # Allow all Vercel preview deployments
-        ],
+        "origins": "*",  # Allow all origins
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization", "Accept"],
         "supports_credentials": False,
@@ -28,55 +23,29 @@ def handle_preflight():
     if request.method == "OPTIONS":
         response = app.make_default_options_response()
         origin = request.headers.get('Origin', '')
-        allowed_origins = [
-            "http://localhost:3000",
-            "https://nutrition-app-beta.vercel.app",
-            "https://nutrition-r3v8rjfk6-adityas-projects-4e6166af.vercel.app",
-            "https://*.vercel.app"  # Allow all Vercel preview deployments
-        ]
         
-        # Check if the origin matches any of our allowed patterns
-        is_allowed = False
-        for allowed_origin in allowed_origins:
-            if allowed_origin == origin or (allowed_origin.endswith('.vercel.app') and origin.endswith('.vercel.app')):
-                is_allowed = True
-                break
-                
-        if is_allowed:
-            response.headers.update({
-                "Access-Control-Allow-Origin": origin,
-                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-                "Access-Control-Max-Age": "3600",
-                "Access-Control-Allow-Credentials": "false"
-            })
+        # Allow all origins
+        response.headers.update({
+            "Access-Control-Allow-Origin": origin,
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type", "Authorization, Accept",
+            "Access-Control-Max-Age": "3600",
+            "Access-Control-Allow-Credentials": "false"
+        })
         return response
 
 # Add CORS headers to all responses
 @app.after_request
 def after_request(response):
     origin = request.headers.get('Origin', '')
-    allowed_origins = [
-        "http://localhost:3000",
-        "https://nutrition-app-beta.vercel.app",
-        "https://nutrition-r3v8rjfk6-adityas-projects-4e6166af.vercel.app",
-        "https://*.vercel.app"  # Allow all Vercel preview deployments
-    ]
     
-    # Check if the origin matches any of our allowed patterns
-    is_allowed = False
-    for allowed_origin in allowed_origins:
-        if allowed_origin == origin or (allowed_origin.endswith('.vercel.app') and origin.endswith('.vercel.app')):
-            is_allowed = True
-            break
-            
-    if is_allowed:
-        response.headers.update({
-            "Access-Control-Allow-Origin": origin,
-            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-            "Access-Control-Allow-Credentials": "false"
-        })
+    # Allow all origins
+    response.headers.update({
+        "Access-Control-Allow-Origin": origin,
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type", "Authorization, Accept",
+        "Access-Control-Allow-Credentials": "false"
+    })
     return response
 
 # Load food database
