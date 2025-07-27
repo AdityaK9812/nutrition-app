@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
 
 interface FoodItem {
   name: string;
@@ -50,8 +49,6 @@ const isLiquidFood = (foodName: string): boolean => {
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [foodQuery, setFoodQuery] = useState('');
   const [quantity, setQuantity] = useState('100');
   const [unit, setUnit] = useState('g');
@@ -60,46 +57,10 @@ export default function Home() {
   const [nutritionData, setNutritionData] = useState<NutritionData | null>(null);
   const [suggestions, setSuggestions] = useState<FoodItem[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      const token = sessionStorage.getItem('authToken');
-      if (!token) {
-        router.replace('/login');
-        return;
-      }
-
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/verify`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': 'application/json'
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('Invalid token');
-        }
-
-        setIsAuthenticated(true);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Auth verification failed:', error);
-        sessionStorage.removeItem('authToken');
-        sessionStorage.removeItem('userEmail');
-        router.replace('/login');
-      }
-    };
-
-    if (mounted) {
-      checkAuth();
-    }
-  }, [router, mounted]);
 
   useEffect(() => {
     if (isLiquidFood(foodQuery)) {
@@ -205,25 +166,7 @@ export default function Home() {
     }
   };
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('authToken');
-    sessionStorage.removeItem('userEmail');
-    router.replace('/login');
-  };
-
   if (!mounted) {
-    return null;
-  }
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
     return null;
   }
 
@@ -246,23 +189,7 @@ export default function Home() {
           <h1 className="text-2xl font-bold bg-gradient-to-r from-amber-950 to-amber-700 bg-clip-text text-transparent">
             NutriSmart
           </h1>
-          <button
-            onClick={handleLogout}
-            className="px-3 py-1.5 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors"
-          >
-            Logout
-          </button>
         </div>
-      </div>
-
-      {/* Desktop Logout Button */}
-      <div className="hidden md:block absolute top-4 right-4 z-50">
-        <button
-          onClick={handleLogout}
-          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-        >
-          Logout
-        </button>
       </div>
       
       {/* Content Container with backdrop blur */}

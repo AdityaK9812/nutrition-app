@@ -4,8 +4,6 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  // Enable static exports for Vercel
-  output: 'standalone',
   // Configure CORS for API calls
   async rewrites() {
     return [
